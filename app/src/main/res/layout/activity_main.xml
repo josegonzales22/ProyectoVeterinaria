@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="#F3F2F2">
+
+    <LinearLayout
+        android:id="@+id/a"
+        android:orientation="horizontal"
+        android:layout_width="415dp"
+        android:layout_height="69dp"
+        android:background="#483AD4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/b"
+        android:orientation="horizontal"
+        android:layout_width="415dp"
+        android:layout_height="69dp"
+        android:background="#483AD4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="433dp"
+        android:layout_height="302dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/blob1" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="541dp"
+        android:layout_height="314dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/blob2" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_width="315dp"
+        android:layout_height="500dp"
+        android:layout_marginTop="95dp"
+        android:layout_marginBottom="96dp"
+        android:background="@drawable/contenedor_redondeado"
+        app:layout_constraintBottom_toTopOf="@+id/b"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/a">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/fuente1"
+            android:text="Veterinaria Pet Toys"
+            android:textColor="#191919"
+            android:textStyle="bold"
+            android:textSize="35sp"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/editTextText"
+            android:layout_marginTop="30dp"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Usuario" />
+        <EditText
+            android:id="@+id/editTextText2"
+            android:layout_marginTop="20dp"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="Contraseña" />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="250dp"
+            android:layout_height="25dp"
+            android:textColor="#483AD4"
+            android:textStyle="bold"
+            android:text="¿Olvidaste tu contraseña?"/>
+        <Button
+            android:layout_marginTop="20dp"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
+            android:text="Ingresar"
+            android:textStyle="bold"
+            android:background="@drawable/boton"
+            android:textColor="@color/white"/>
+        <TextView
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:textColor="#191919"
+            android:textStyle="bold"
+            android:text="¿No tienes una cuenta?"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:textColor="#483AD4"
+            android:textStyle="bold"
+            android:text="REGISTRARSE"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

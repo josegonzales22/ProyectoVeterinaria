@@ -12,7 +12,7 @@
         android:orientation="horizontal"
         android:layout_width="415dp"
         android:layout_height="69dp"
-        android:background="#483AD4"
+        android:background="#A4303F"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,7 +24,7 @@
         android:orientation="horizontal"
         android:layout_width="415dp"
         android:layout_height="69dp"
-        android:background="#483AD4"
+        android:background="#A4303F"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -91,7 +91,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="250dp"
             android:layout_height="25dp"
-            android:textColor="#483AD4"
+            android:textColor="#A4303F"
             android:textStyle="bold"
             android:text="¿Olvidaste tu contraseña?"/>
         <Button
@@ -112,7 +112,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:textColor="#483AD4"
+            android:textColor="#A4303F"
             android:textStyle="bold"
             android:text="REGISTRARSE"/>
     </LinearLayout>

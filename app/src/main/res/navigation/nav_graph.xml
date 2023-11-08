@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentInicio">
+
+    <fragment
+        android:id="@+id/fragmentInicio"
+        android:name="com.jgonzales.proyectoveterinaria.FragmentInicio"
+        android:label="fragment_inicio"
+        tools:layout="@layout/fragment_inicio" />
+    <fragment
+        android:id="@+id/fragmentCliente"
+        android:name="com.jgonzales.proyectoveterinaria.FragmentCliente"
+        android:label="fragment_cliente"
+        tools:layout="@layout/fragment_cliente" />
+    <fragment
+        android:id="@+id/fragmentMascota"
+        android:name="com.jgonzales.proyectoveterinaria.FragmentMascota"
+        android:label="fragment_mascota"
+        tools:layout="@layout/fragment_mascota" />
+    <fragment
+        android:id="@+id/fragmentMedicina"
+        android:name="com.jgonzales.proyectoveterinaria.FragmentMedicina"
+        android:label="fragment_medicina"
+        tools:layout="@layout/fragment_medicina" />
+    <fragment
+        android:id="@+id/fragmentMedico"
+        android:name="com.jgonzales.proyectoveterinaria.FragmentMedico"
+        android:label="fragment_medico"
+        tools:layout="@layout/fragment_medico" />
+</navigation>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navInicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Inicio"
+        android:icon="@drawable/house_solid"/>
+    <item
+        android:id="@+id/navCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Cliente"
+        android:icon="@drawable/user_solid"/>
+    <item
+        android:id="@+id/navMascota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Mascota"
+        android:icon="@drawable/bone_solid"/>
+    <item
+        android:id="@+id/navMedicina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Medicina"
+        android:icon="@drawable/book_medical_solid"/>
+    <item
+        android:id="@+id/navMedico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Medico"
+        android:icon="@drawable/user_nurse_solid"/>
+</menu>

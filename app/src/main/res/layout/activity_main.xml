@@ -109,12 +109,14 @@
             android:textColor="#191919"
             android:textStyle="bold"
             android:text="¿No tienes una cuenta?"/>
+
         <TextView
+            android:id="@+id/btnRegistrarse"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
+            android:text="REGISTRARSE"
             android:textColor="#A4303F"
-            android:textStyle="bold"
-            android:text="REGISTRARSE"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

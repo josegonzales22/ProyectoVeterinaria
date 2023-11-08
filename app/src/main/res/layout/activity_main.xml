@@ -95,6 +95,7 @@
             android:textStyle="bold"
             android:text="¿Olvidaste tu contraseña?"/>
         <Button
+            android:id="@+id/btnIngresar"
             android:layout_marginTop="20dp"
             android:layout_width="220dp"
             android:layout_height="50dp"

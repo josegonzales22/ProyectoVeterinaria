@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
             val intento1 = Intent(this, RegistroUsuario::class.java)
             startActivity(intento1)
         }
-        btnIngresar = findViewById(R.id.btnIngresar)
+        btnIngresar = findViewById(R.id.btnNuevoCliente)
         btnIngresar.setOnClickListener {
             val intento2 = Intent(this, ContenedorActivity::class.java)
             startActivity(intento2)

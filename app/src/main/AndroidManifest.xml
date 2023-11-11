@@ -13,6 +13,48 @@
         android:theme="@style/Theme.ProyectoVeterinaria"
         tools:targetApi="31">
         <activity
+            android:name=".EliminarMedico"
+            android:exported="false" />
+        <activity
+            android:name=".EditarMedico"
+            android:exported="false" />
+        <activity
+            android:name=".NuevoMedico"
+            android:exported="false" />
+        <activity
+            android:name=".EliminarMedicina"
+            android:exported="false" />
+        <activity
+            android:name=".EditarMedicina"
+            android:exported="false" />
+        <activity
+            android:name=".NuevaMedicina"
+            android:exported="false" />
+        <activity
+            android:name=".TicketMascota"
+            android:exported="false" />
+        <activity
+            android:name=".TicketMascotaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EliminarMascota"
+            android:exported="false" />
+        <activity
+            android:name=".EditarMascota"
+            android:exported="false" />
+        <activity
+            android:name=".NuevaMascota"
+            android:exported="false" />
+        <activity
+            android:name=".EliminarCliente"
+            android:exported="false" />
+        <activity
+            android:name=".EditarCliente"
+            android:exported="false" />
+        <activity
+            android:name=".activity_nuevo_cliente"
+            android:exported="false" />
+        <activity
             android:name=".ContenedorActivity"
             android:exported="false" />
         <activity

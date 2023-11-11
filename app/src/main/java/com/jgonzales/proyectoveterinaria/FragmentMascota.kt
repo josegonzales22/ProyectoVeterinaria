@@ -1,10 +1,12 @@
 package com.jgonzales.proyectoveterinaria
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +23,11 @@ class FragmentMascota : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var btnNuevaMascota: Button
+    lateinit var btnEditarMascota: Button
+    lateinit var btnEliminarMascota: Button
+    lateinit var btnGenerarTicketMascota: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,7 +41,34 @@ class FragmentMascota : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mascota, container, false)
+        val view = inflater.inflate(R.layout.fragment_mascota, container, false)
+
+        btnNuevaMascota = view.findViewById(R.id.btnNuevaMascota)
+        btnNuevaMascota.setOnClickListener{
+            val intent = Intent(requireActivity(), NuevaMascota::class.java)
+            startActivity(intent)
+        }
+
+        btnEditarMascota = view.findViewById(R.id.btnEditarMascota)
+        btnEditarMascota.setOnClickListener {
+            val intent = Intent(requireActivity(), EditarMascota::class.java)
+            startActivity(intent)
+        }
+
+        btnEliminarMascota = view.findViewById(R.id.btnEliminarMascota)
+        btnEliminarMascota.setOnClickListener {
+            val intent = Intent(requireActivity(), EliminarMascota::class.java)
+            startActivity(intent)
+        }
+
+        btnGenerarTicketMascota = view.findViewById(R.id.btnGenerarTicketMascota)
+        btnGenerarTicketMascota.setOnClickListener {
+            val intent = Intent(requireActivity(), TicketMascota::class.java)
+            startActivity(intent)
+        }
+
+        return view
+
     }
 
     companion object {

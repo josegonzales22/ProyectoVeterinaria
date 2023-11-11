@@ -6,7 +6,6 @@ plugins {
 android {
     namespace = "com.jgonzales.proyectoveterinaria"
     compileSdk = 34
-
     defaultConfig {
         applicationId = "com.jgonzales.proyectoveterinaria"
         minSdk = 24

@@ -1,10 +1,12 @@
 package com.jgonzales.proyectoveterinaria
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +23,10 @@ class FragmentMedicina : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var btnNuevaMedicina: Button
+    lateinit var btnEditarMedicina: Button
+    lateinit var btnEliminarMedicina: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -34,7 +40,26 @@ class FragmentMedicina : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_medicina, container, false)
+        val view =  inflater.inflate(R.layout.fragment_medicina, container, false)
+
+        btnNuevaMedicina = view.findViewById(R.id.btnNuevoMedicamento)
+        btnNuevaMedicina.setOnClickListener{
+            val intent = Intent(requireActivity(), NuevaMedicina::class.java)
+            startActivity(intent)
+        }
+
+        btnEditarMedicina = view.findViewById(R.id.btnEditarMedicamento)
+        btnEditarMedicina.setOnClickListener {
+            val intent = Intent(requireActivity(), EditarMedicina::class.java)
+            startActivity(intent)
+        }
+
+        btnEliminarMedicina = view.findViewById(R.id.btnEliminarMedicamento)
+        btnEliminarMedicina.setOnClickListener {
+            val intent = Intent(requireActivity(), EliminarMedicina::class.java)
+            startActivity(intent)
+        }
+        return view
     }
 
     companion object {

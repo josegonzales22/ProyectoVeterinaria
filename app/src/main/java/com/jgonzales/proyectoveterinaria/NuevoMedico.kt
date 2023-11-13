@@ -22,6 +22,7 @@ class NuevoMedico : AppCompatActivity() {
     lateinit var txtApellidoMedico: EditText
     lateinit var txtCorreoMedico: EditText
     lateinit var txtCelularMedico: EditText
+    lateinit var txtContraseniaMedico:EditText
     lateinit var btnRegistrarMedico: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +45,7 @@ class NuevoMedico : AppCompatActivity() {
         txtApellidoMedico = findViewById(R.id.txtApellidoMedico)
         txtCorreoMedico = findViewById(R.id.txtCorreoMedico)
         txtCelularMedico = findViewById(R.id.txtCelularMedico)
+        txtContraseniaMedico = findViewById(R.id.txtContrasenia)
         btnRegistrarMedico = findViewById(R.id.btnRegistrarMedico)
         btnRegistrarMedico.setOnClickListener{
             registrarLibro()
@@ -52,20 +54,22 @@ class NuevoMedico : AppCompatActivity() {
 
     private fun registrarLibro(){
         val dniMedico=txtDNIMedico.text.toString()
+        val contraMedico=txtContraseniaMedico.text.toString()
         val nombreMedico=txtNombreMedico.text.toString()
         val apellidoMedico=txtApellidoMedico.text.toString()
         val correoMedico=txtCorreoMedico.text.toString()
         val celularMedico=txtCelularMedico.text.toString()
 
-        if(dniMedico.isEmpty() || nombreMedico.isEmpty() || apellidoMedico.isEmpty() || correoMedico.isEmpty() || celularMedico.isEmpty()){
+        if(dniMedico.isEmpty() || nombreMedico.isEmpty() || apellidoMedico.isEmpty() || correoMedico.isEmpty() || celularMedico.isEmpty() || contraMedico.isEmpty()){
             Toast.makeText(this, "Completar todos los campos", Toast.LENGTH_SHORT).show()
         }else{
             val objMedico = Medico()
-            objMedico.dniMedico=dniMedico.toInt()
+            objMedico.dniMedico=dniMedico
+            objMedico.contrasenia=contraMedico
             objMedico.nombreMedico=nombreMedico
             objMedico.apellidoMedico=apellidoMedico
             objMedico.correoMedico=correoMedico
-            objMedico.celularMedico=celularMedico.toInt()
+            objMedico.celularMedico=celularMedico
             val medicoDAO = MedicoDAO(this)
             val mensaje = medicoDAO.registrarMedico(objMedico)
             mostrarMensaje(mensaje)
@@ -86,6 +90,7 @@ class NuevoMedico : AppCompatActivity() {
         txtApellidoMedico.setText("")
         txtCorreoMedico.setText("")
         txtCelularMedico.setText("")
+        txtContraseniaMedico.setText("")
     }
 
 

@@ -81,11 +81,13 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#02020A"/>
+
         <EditText
+            android:id="@+id/txtDNIMedico"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:inputType="number"
-            android:hint="Ingrese su dni"/>
+            android:hint="Ingrese su dni"
+            android:inputType="number" />
 
         <TextView
             android:layout_width="match_parent"
@@ -95,11 +97,13 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#02020A"/>
+
         <EditText
+            android:id="@+id/txtNombreMedico"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:inputType="text"
-            android:hint="Ingrese sus nombres"/>
+            android:hint="Ingrese sus nombres"
+            android:inputType="text" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -108,11 +112,13 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#02020A"/>
+
         <EditText
+            android:id="@+id/txtApellidoMedico"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:inputType="text"
-            android:hint="Ingrese sus apellidos"/>
+            android:hint="Ingrese sus apellidos"
+            android:inputType="text" />
 
         <TextView
             android:layout_width="match_parent"
@@ -122,11 +128,13 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#02020A"/>
+
         <EditText
+            android:id="@+id/txtCorreoMedico"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:inputType="text"
-            android:hint="Ingrese su dirección de correo"/>
+            android:hint="Ingrese su dirección de correo"
+            android:inputType="text" />
 
         <TextView
             android:layout_width="match_parent"
@@ -138,22 +146,25 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/txtCelularMedico"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:inputType="number"
-            android:hint="Ingrese su celular"/>
+            android:hint="Ingrese su celular"
+            android:inputType="number" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:gravity="center"
             android:layout_marginTop="20dp">
+
             <Button
+                android:id="@+id/btnRegistrarMedico"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
-                android:text="Registrar"
-                android:textStyle="bold"
                 android:background="@drawable/boton"
-                android:textColor="@color/white"/>
+                android:text="Registrar"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

@@ -56,12 +56,14 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
             android:paddingLeft="20dp"
             android:paddingRight="20dp">
+
             <TextView
+                android:id="@+id/txtMensajeInicio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Hola {usuario}"
-                android:textSize="25sp"
-                android:textColor="#000000"/>
+                android:textColor="#000000"
+                android:textSize="25sp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

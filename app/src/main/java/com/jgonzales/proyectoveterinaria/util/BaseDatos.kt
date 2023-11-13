@@ -37,11 +37,12 @@ class BaseDatos (context: Context) : SQLiteOpenHelper (context, DATABASE_NAME, n
 
         val sqlMedico = "CREATE TABLE IF NOT EXISTS medicos " +
                 "(idMedico INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "dniMedico INTEGER NOT NULL UNIQUE," +
+                "dniMedico TEXT NOT NULL UNIQUE," +
+                "contrasenia TEXT NOT NULL,"+
                 "nombreMedico TEXT NOT NULL," +
                 "apellidoMedico TEXT NOT NULL," +
                 "correoMedico TEXT NOT NULL," +
-                "celularMedico INTEGER NOT NULL CHECK(length(celularMedico) = 9) " +
+                "celularMedico TEXT NOT NULL CHECK(length(celularMedico) = 9) " +
                 "CHECK(length(dniMedico) = 8) );"
 
         db.execSQL(sqlMedicina)

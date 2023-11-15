@@ -173,10 +173,11 @@
             android:drawableTop="@drawable/wired_flat_268_avatar_man"
             android:text="Lista de clientes"
             android:gravity="center_horizontal"
+            android:textColor="#F3F2F2"
             />
 
         <Button
-            android:id="@+id/btnNuevoCliente"
+            android:id="@+id/btnNuevoMedico"
             android:layout_width="180dp"
             android:layout_height="match_parent"
             android:layout_marginStart="22dp"
@@ -184,6 +185,7 @@
             android:drawableTop="@drawable/wired_flat_49_plus_circle"
             android:text="Nuevo cliente"
             android:gravity="center_horizontal"
+            android:textColor="#F3F2F2"
             />
     </LinearLayout>
 
@@ -197,16 +199,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
         <Button
-            android:id="@+id/btnEditarCliente"
+            android:id="@+id/btnEditarMedico"
             android:layout_width="180dp"
             android:layout_height="match_parent"
             android:background="@drawable/boton_c"
             android:drawableTop="@drawable/wired_flat_35_edit"
             android:text="Editar cliente"
             android:gravity="center_horizontal"
+            android:textColor="#F3F2F2"
             />
         <Button
-            android:id="@+id/btnEliminarCliente"
+            android:id="@+id/btnEliminarMedico"
             android:layout_width="180dp"
             android:layout_height="match_parent"
             android:layout_marginStart="22dp"
@@ -214,6 +217,7 @@
             android:drawableTop="@drawable/wired_flat_50_minus_circle"
             android:text="Eliminar cliente"
             android:gravity="center_horizontal"
+            android:textColor="#F3F2F2"
             />
     </LinearLayout>
 

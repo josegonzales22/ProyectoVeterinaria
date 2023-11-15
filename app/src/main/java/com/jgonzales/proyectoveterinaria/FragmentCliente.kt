@@ -25,6 +25,8 @@ class FragmentCliente : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    lateinit var txtMensaje:TextView
+
     lateinit var btnNuevoCliente: Button
     lateinit var btnEditarCliente: Button
     lateinit var btnEliminarCliente: Button
@@ -60,6 +62,11 @@ class FragmentCliente : Fragment() {
             val intent = Intent(requireActivity(), EliminarCliente::class.java)
             startActivity(intent)
         }
+
+        txtMensaje = view.findViewById(R.id.txtMensaje)
+        val databundle = arguments
+        val medicName=databundle!!.getString("medicName")
+        txtMensaje.setText("Hola "+medicName.toString())
 
         return view
 

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +23,8 @@ class FragmentMedicina : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    lateinit var txtMensaje:TextView
 
     lateinit var btnNuevaMedicina: Button
     lateinit var btnEditarMedicina: Button
@@ -59,6 +62,10 @@ class FragmentMedicina : Fragment() {
             val intent = Intent(requireActivity(), EliminarMedicina::class.java)
             startActivity(intent)
         }
+        txtMensaje = view.findViewById(R.id.txtMensaje)
+        val databundle = arguments
+        val medicName=databundle!!.getString("medicName")
+        txtMensaje.setText("Hola "+medicName.toString())
         return view
     }
 

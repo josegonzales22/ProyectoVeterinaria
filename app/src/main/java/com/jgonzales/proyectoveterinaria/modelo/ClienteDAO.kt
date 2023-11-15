@@ -48,6 +48,13 @@ class ClienteDAO (context:Context) {
                     cli.correoCliente=cr.getString(4).toString()
                     cli.celularCliente=cr.getString(5).toInt()
                 }while (cr.moveToNext())
+            }else{
+                cli.id=0
+                cli.dniCliente=88888888
+                cli.nombreCliente="Ninguno"
+                cli.apellidoCliente="Ninguno"
+                cli.correoCliente="Ninguno"
+                cli.celularCliente=999999999
             }
         }catch (ex:Exception){
         }

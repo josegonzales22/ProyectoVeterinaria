@@ -8,19 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.jgonzales.proyectoveterinaria.entidades.Medico
+import com.jgonzales.proyectoveterinaria.modelo.MedicoDAO
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentMedico.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentMedico : Fragment() {
-    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -29,6 +23,10 @@ class FragmentMedico : Fragment() {
     lateinit var btnNuevoMedico: Button
     lateinit var btnEditarMedico: Button
     lateinit var btnEliminarMedico: Button
+
+    lateinit var txtApeMedic:TextView
+    lateinit var txtMailMedic:TextView
+    lateinit var txtCelMedic:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,43 +42,15 @@ class FragmentMedico : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_medico, container, false)
-
-        btnNuevoMedico = view.findViewById(R.id.btnNuevoMedico)
-        btnNuevoMedico.setOnClickListener{
-            val intent = Intent(requireActivity(), NuevoMedico::class.java)
-            startActivity(intent)
-        }
-
-        btnEditarMedico = view.findViewById(R.id.btnEditarMedico)
-        btnEditarMedico.setOnClickListener {
-            val intent = Intent(requireActivity(), EditarMedico::class.java)
-            startActivity(intent)
-        }
-
-        btnEliminarMedico = view.findViewById(R.id.btnEliminarMedico)
-        btnEliminarMedico.setOnClickListener {
-            val intent = Intent(requireActivity(), EliminarMedico::class.java)
-            startActivity(intent)
-        }
-
-        txtMensaje = view.findViewById(R.id.txtMensaje)
+        asignarReferencias(view)
+        eventoOnClick()
+        seccionMedico()
         val databundle = arguments
         val medicName=databundle!!.getString("medicName")
         txtMensaje.setText("Hola "+medicName.toString())
-
         return view
     }
-
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentMedico.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             FragmentMedico().apply {
@@ -89,5 +59,36 @@ class FragmentMedico : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+    fun asignarReferencias(view : View){
+        btnNuevoMedico = view.findViewById(R.id.btnNuevoMedico)
+        btnEditarMedico = view.findViewById(R.id.btnEditarMedico)
+        btnEliminarMedico = view.findViewById(R.id.btnEliminarMedico)
+        txtMensaje = view.findViewById(R.id.txtMensaje)
+        txtApeMedic = view.findViewById(R.id.infApeMed)
+        txtMailMedic = view.findViewById(R.id.infMailMed)
+        txtCelMedic = view.findViewById(R.id.infCelMed)
+    }
+    fun eventoOnClick(){
+        btnNuevoMedico.setOnClickListener{
+            val intent = Intent(requireActivity(), NuevoMedico::class.java)
+            startActivity(intent)
+        }
+        btnEditarMedico.setOnClickListener {
+            val intent = Intent(requireActivity(), EditarMedico::class.java)
+            startActivity(intent)
+        }
+        btnEliminarMedico.setOnClickListener {
+            val intent = Intent(requireActivity(), EliminarMedico::class.java)
+            startActivity(intent)
+        }
+    }
+    fun seccionMedico(){
+        var medic: MedicoDAO = MedicoDAO(requireActivity())
+        var medic2: Medico = Medico()
+        medic2 = medic.obtenerMedico()
+        txtApeMedic.setText("Apellido: "+medic2.apellidoMedico)
+        txtMailMedic.setText("Correo: "+medic2.correoMedico)
+        txtCelMedic.setText("Celular: "+medic2.celularMedico)
     }
 }

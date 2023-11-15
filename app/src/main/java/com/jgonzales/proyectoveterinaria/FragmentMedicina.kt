@@ -8,17 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.jgonzales.proyectoveterinaria.entidades.Medicina
+import com.jgonzales.proyectoveterinaria.modelo.MedicinaDAO
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentMedicina.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class FragmentMedicina : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -29,6 +25,10 @@ class FragmentMedicina : Fragment() {
     lateinit var btnNuevaMedicina: Button
     lateinit var btnEditarMedicina: Button
     lateinit var btnEliminarMedicina: Button
+
+    lateinit var txtCodMed:TextView
+    lateinit var txtCantMed:TextView
+    lateinit var txtDesMed:TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,27 +42,10 @@ class FragmentMedicina : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_medicina, container, false)
-
-        btnNuevaMedicina = view.findViewById(R.id.btnNuevoMedicamento)
-        btnNuevaMedicina.setOnClickListener{
-            val intent = Intent(requireActivity(), NuevaMedicina::class.java)
-            startActivity(intent)
-        }
-
-        btnEditarMedicina = view.findViewById(R.id.btnEditarMedicamento)
-        btnEditarMedicina.setOnClickListener {
-            val intent = Intent(requireActivity(), EditarMedicina::class.java)
-            startActivity(intent)
-        }
-
-        btnEliminarMedicina = view.findViewById(R.id.btnEliminarMedicamento)
-        btnEliminarMedicina.setOnClickListener {
-            val intent = Intent(requireActivity(), EliminarMedicina::class.java)
-            startActivity(intent)
-        }
-        txtMensaje = view.findViewById(R.id.txtMensaje)
+        asignarReferencias(view)
+        eventoOnClick()
+        seccionMedicamento()
         val databundle = arguments
         val medicName=databundle!!.getString("medicName")
         txtMensaje.setText("Hola "+medicName.toString())
@@ -70,15 +53,6 @@ class FragmentMedicina : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentMedicina.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             FragmentMedicina().apply {
@@ -87,5 +61,36 @@ class FragmentMedicina : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+    fun seccionMedicamento(){
+        var med: MedicinaDAO = MedicinaDAO(requireActivity())
+        var med2: Medicina = Medicina()
+        med2 = med.obtenerMedicina()
+        txtCodMed.setText("Código: "+med2.codigoMedicina)
+        txtCantMed.setText("Cantidad: "+med2.cantidadMedicina)
+        txtDesMed.setText("Descripción: "+med2.descripcionMedicina)
+    }
+    fun asignarReferencias(view : View){
+        btnNuevaMedicina = view.findViewById(R.id.btnNuevoMedicamento)
+        btnEditarMedicina = view.findViewById(R.id.btnEditarMedicamento)
+        btnEliminarMedicina = view.findViewById(R.id.btnEliminarMedicamento)
+        txtMensaje = view.findViewById(R.id.txtMensaje)
+        txtCodMed = view.findViewById(R.id.infCodMed)
+        txtCantMed = view.findViewById(R.id.infCantMed)
+        txtDesMed = view.findViewById(R.id.infDesMed)
+    }
+    fun eventoOnClick(){
+        btnNuevaMedicina.setOnClickListener{
+            val intent = Intent(requireActivity(), NuevaMedicina::class.java)
+            startActivity(intent)
+        }
+        btnEditarMedicina.setOnClickListener {
+            val intent = Intent(requireActivity(), EditarMedicina::class.java)
+            startActivity(intent)
+        }
+        btnEliminarMedicina.setOnClickListener {
+            val intent = Intent(requireActivity(), EliminarMedicina::class.java)
+            startActivity(intent)
+        }
     }
 }

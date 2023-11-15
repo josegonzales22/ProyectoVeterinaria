@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.viewbinding.ViewBindings
 import com.jgonzales.proyectoveterinaria.entidades.Cliente
 import com.jgonzales.proyectoveterinaria.modelo.ClienteDAO
 
@@ -67,9 +66,9 @@ class FragmentCliente : Fragment() {
             }
     }
     fun asignarRerefencias(view : View){
-        btnNuevoCliente = view.findViewById(R.id.btnNuevoCliente)
-        btnEditarCliente = view.findViewById(R.id.btnEditarCliente)
-        btnEliminarCliente = view.findViewById(R.id.btnEliminarCliente)
+        btnNuevoCliente = view.findViewById(R.id.btnNuevoMedico)
+        btnEditarCliente = view.findViewById(R.id.btnEditarMedico)
+        btnEliminarCliente = view.findViewById(R.id.btnEliminarMedico)
         txtMensaje = view.findViewById(R.id.txtMensaje)
 
         txtDniCli = view.findViewById(R.id.infDniCli)

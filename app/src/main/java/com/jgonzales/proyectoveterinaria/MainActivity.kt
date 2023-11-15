@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.jgonzales.proyectoveterinaria.modelo.ClienteDAO
 import com.jgonzales.proyectoveterinaria.modelo.MedicoDAO
 
 class MainActivity : AppCompatActivity() {
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             val intento1 = Intent(this, RegistroUsuario::class.java)
             startActivity(intento1)
         }
-        btnIngresar = findViewById(R.id.btnNuevoCliente)
+        btnIngresar = findViewById(R.id.btnNuevoMedico)
         btnIngresar.setOnClickListener {
             Entrar()
         }

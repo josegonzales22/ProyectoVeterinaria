@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
     <color name="colorPrincipal">#A4303F</color>
     <color name="blancoPersonalizado">#F3F2F2</color>
     <color name="oscuroPersonalizado">#02020A</color>

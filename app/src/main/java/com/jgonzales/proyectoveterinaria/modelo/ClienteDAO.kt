@@ -2,10 +2,11 @@ package com.jgonzales.proyectoveterinaria.modelo
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import com.jgonzales.proyectoveterinaria.entidades.Cliente
 import com.jgonzales.proyectoveterinaria.entidades.Mascota
 import com.jgonzales.proyectoveterinaria.util.BaseDatos
-import java.lang.Exception
+import kotlin.Exception
 
 class ClienteDAO (context:Context) {
     private var baseDatos:BaseDatos = BaseDatos(context)
@@ -33,5 +34,23 @@ class ClienteDAO (context:Context) {
 
         return respuesta
     }
-
+    fun obtenerCliente():Cliente{
+        var cli : Cliente=Cliente()
+        val db=baseDatos.readableDatabase
+        var cr:Cursor=db.rawQuery("SELECT * FROM clientes", null)
+        try {
+            if(cr!=null&&cr.moveToFirst()){
+                do{
+                    cli.id=cr.getString(0).toInt()
+                    cli.dniCliente=cr.getString(1).toInt()
+                    cli.nombreCliente=cr.getString(2).toString()
+                    cli.apellidoCliente=cr.getString(3).toString()
+                    cli.correoCliente=cr.getString(4).toString()
+                    cli.celularCliente=cr.getString(5).toInt()
+                }while (cr.moveToNext())
+            }
+        }catch (ex:Exception){
+        }
+        return cli
+    }
 }

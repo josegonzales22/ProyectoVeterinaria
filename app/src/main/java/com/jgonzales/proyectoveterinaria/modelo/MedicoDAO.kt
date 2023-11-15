@@ -58,4 +58,25 @@ class MedicoDAO (context: Context) {
         }
         return null
     }
+    fun obtenerMedico():Medico{
+        var medico:Medico = Medico()
+        val db=baseDatos.readableDatabase
+        var cr:Cursor=db.rawQuery("SELECT * FROM medicos ORDER BY idMedico DESC LIMIT 1", null)
+        try {
+            if(cr!=null&&cr.moveToFirst()){
+                do{
+                    medico.idMedico=cr.getString(0).toInt()
+                    medico.dniMedico=cr.getString(1).toString()
+                    medico.contrasenia=cr.getString(2).toString()
+                    medico.nombreMedico=cr.getString(3).toString()
+                    medico.apellidoMedico=cr.getString(4).toString()
+                    medico.correoMedico=cr.getString(5).toString()
+                    medico.celularMedico=cr.getString(6).toString()
+                }while (cr.moveToNext())
+            }
+        }catch (ex:Exception){
+        }
+        db.close()
+        return medico
+    }
 }

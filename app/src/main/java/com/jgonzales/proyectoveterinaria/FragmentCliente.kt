@@ -9,17 +9,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.viewbinding.ViewBindings
+import com.jgonzales.proyectoveterinaria.entidades.Cliente
+import com.jgonzales.proyectoveterinaria.modelo.ClienteDAO
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentCliente.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FragmentCliente : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -30,6 +26,10 @@ class FragmentCliente : Fragment() {
     lateinit var btnNuevoCliente: Button
     lateinit var btnEditarCliente: Button
     lateinit var btnEliminarCliente: Button
+
+    lateinit var txtDniCli:TextView
+    lateinit var txtNomCli:TextView
+    lateinit var txtApeCli:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -44,44 +44,19 @@ class FragmentCliente : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_cliente, container, false)
+        asignarRerefencias(view)
+        eventoOnClick()
 
-        btnNuevoCliente = view.findViewById(R.id.btnNuevoCliente)
-        btnNuevoCliente.setOnClickListener{
-            val intent = Intent(requireActivity(), activity_nuevo_cliente::class.java)
-            startActivity(intent)
-        }
+        seccionCliente()
 
-        btnEditarCliente = view.findViewById(R.id.btnEditarCliente)
-        btnEditarCliente.setOnClickListener {
-            val intent = Intent(requireActivity(), EditarCliente::class.java)
-            startActivity(intent)
-        }
-
-        btnEliminarCliente = view.findViewById(R.id.btnEliminarCliente)
-        btnEliminarCliente.setOnClickListener {
-            val intent = Intent(requireActivity(), EliminarCliente::class.java)
-            startActivity(intent)
-        }
-
-        txtMensaje = view.findViewById(R.id.txtMensaje)
         val databundle = arguments
         val medicName=databundle!!.getString("medicName")
         txtMensaje.setText("Hola "+medicName.toString())
-
         return view
 
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentCliente.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             FragmentCliente().apply {
@@ -90,5 +65,37 @@ class FragmentCliente : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+    fun asignarRerefencias(view : View){
+        btnNuevoCliente = view.findViewById(R.id.btnNuevoCliente)
+        btnEditarCliente = view.findViewById(R.id.btnEditarCliente)
+        btnEliminarCliente = view.findViewById(R.id.btnEliminarCliente)
+        txtMensaje = view.findViewById(R.id.txtMensaje)
+
+        txtDniCli = view.findViewById(R.id.infDniCli)
+        txtNomCli = view.findViewById(R.id.infNomCli)
+        txtApeCli = view.findViewById(R.id.infApeCli)
+    }
+    fun eventoOnClick(){
+        btnNuevoCliente.setOnClickListener{
+            val intent = Intent(requireActivity(), activity_nuevo_cliente::class.java)
+            startActivity(intent)
+        }
+        btnEditarCliente.setOnClickListener {
+            val intent = Intent(requireActivity(), EditarCliente::class.java)
+            startActivity(intent)
+        }
+        btnEliminarCliente.setOnClickListener {
+            val intent = Intent(requireActivity(), EliminarCliente::class.java)
+            startActivity(intent)
+        }
+    }
+    fun seccionCliente(){
+        var cli: ClienteDAO = ClienteDAO(requireActivity())
+        var cliente: Cliente = Cliente()
+        cliente=cli.obtenerCliente()
+        txtDniCli.setText("Dni: "+cliente.dniCliente)
+        txtNomCli.setText("Nombre: "+cliente.nombreCliente)
+        txtApeCli.setText("Apellido: "+cliente.apellidoCliente)
     }
 }

@@ -2,6 +2,7 @@ package com.jgonzales.proyectoveterinaria.modelo
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.util.Log
 import com.jgonzales.proyectoveterinaria.entidades.Mascota
 import com.jgonzales.proyectoveterinaria.util.BaseDatos
@@ -31,5 +32,24 @@ class MascotaDAO (context: Context) {
         }
 
         return respuesta
+    }
+    fun obtenerMascota():Mascota{
+        var mas:Mascota = Mascota()
+        val db=baseDatos.readableDatabase
+        var cr:Cursor=db.rawQuery("SELECT * FROM mascotas ORDER BY idMascota DESC LIMIT 1", null)
+        try {
+            if(cr!=null&&cr.moveToFirst()){
+                do{
+                    mas.idMascota=cr.getString(0).toInt()
+                    mas.nombreMascota=cr.getString(1).toString()
+                    mas.especieMascota=cr.getString(2).toString()
+                    mas.razaMascota=cr.getString(3).toString()
+                    mas.generoMascota=cr.getString(4).toString()
+                }while (cr.moveToNext())
+            }
+        }catch (ex:Exception){
+        }
+        db.close()
+        return mas
     }
 }

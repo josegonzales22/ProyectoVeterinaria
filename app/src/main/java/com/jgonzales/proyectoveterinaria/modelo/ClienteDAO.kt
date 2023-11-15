@@ -37,7 +37,7 @@ class ClienteDAO (context:Context) {
     fun obtenerCliente():Cliente{
         var cli : Cliente=Cliente()
         val db=baseDatos.readableDatabase
-        var cr:Cursor=db.rawQuery("SELECT * FROM clientes", null)
+        var cr:Cursor=db.rawQuery("SELECT * FROM clientes ORDER BY id DESC LIMIT 1", null)
         try {
             if(cr!=null&&cr.moveToFirst()){
                 do{
@@ -51,6 +51,7 @@ class ClienteDAO (context:Context) {
             }
         }catch (ex:Exception){
         }
+        db.close()
         return cli
     }
 }

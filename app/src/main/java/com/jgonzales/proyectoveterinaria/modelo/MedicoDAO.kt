@@ -73,6 +73,14 @@ class MedicoDAO (context: Context) {
                     medico.correoMedico=cr.getString(5).toString()
                     medico.celularMedico=cr.getString(6).toString()
                 }while (cr.moveToNext())
+            }else{
+                medico.idMedico=0
+                medico.dniMedico="Ninguno"
+                medico.contrasenia="Ninguno"
+                medico.nombreMedico="Ninguno"
+                medico.apellidoMedico="Ninguno"
+                medico.correoMedico="Ninguno"
+                medico.celularMedico="Ninguno"
             }
         }catch (ex:Exception){
         }

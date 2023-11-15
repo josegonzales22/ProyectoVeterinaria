@@ -46,6 +46,12 @@ class MascotaDAO (context: Context) {
                     mas.razaMascota=cr.getString(3).toString()
                     mas.generoMascota=cr.getString(4).toString()
                 }while (cr.moveToNext())
+            }else{
+                mas.idMascota=0
+                mas.nombreMascota="Ninguno"
+                mas.especieMascota="Ninguno"
+                mas.razaMascota="Ninguno"
+                mas.generoMascota="Ninguno"
             }
         }catch (ex:Exception){
         }

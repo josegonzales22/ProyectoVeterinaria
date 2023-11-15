@@ -63,6 +63,16 @@ class MedicinaDAO (context: Context){
                     medicina.fechaVencimientoMedicina=date2
                     medicina.cantidadMedicina = cr.getString(4).toInt()
                 }while (cr.moveToNext())
+            }else{
+                medicina.idMedicina=0
+                medicina.codigoMedicina="Ninguno"
+                medicina.descripcionMedicina="Ninguno"
+                fecha="01-01-2000"
+                val dateFormatter = DateTimeFormatter.ofPattern(pattern)
+                val date = LocalDate.parse(fecha, dateFormatter)
+                val date2 = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant())
+                medicina.fechaVencimientoMedicina=date2
+                medicina.cantidadMedicina = 0
             }
         }catch (ex:Exception){
         }

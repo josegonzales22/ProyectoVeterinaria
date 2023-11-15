@@ -45,11 +45,17 @@ class BaseDatos (context: Context) : SQLiteOpenHelper (context, DATABASE_NAME, n
                 "celularMedico TEXT NOT NULL CHECK(length(celularMedico) = 9) " +
                 "CHECK(length(dniMedico) = 8) );"
 
+        val sqlPrimerUsuario = "INSERT INTO medicos " +
+                "(dniMedico, contrasenia, nombreMedico, " +
+                "apellidoMedico, correoMedico, celularMedico) VALUES " +
+                "('12345678', 'admin', 'adminNom', 'adminApe', " +
+                "'admin@example.com', '123456789');"
+
         db.execSQL(sqlMedicina)
         db.execSQL(sqlMascota)
         db.execSQL(sqlCliente)
         db.execSQL(sqlMedico)
-
+        db.execSQL(sqlPrimerUsuario)
     }
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS clientes")

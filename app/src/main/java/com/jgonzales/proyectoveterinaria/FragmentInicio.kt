@@ -59,6 +59,10 @@ class FragmentInicio : Fragment() {
         seccionMascota()
         seccionMedico()
         seccionMedicamento()
+
+        val databundle = arguments
+        val medicName=databundle!!.getString("medicName")
+        txtMensaje.setText("Hola "+medicName.toString())
         return view
     }
     companion object {

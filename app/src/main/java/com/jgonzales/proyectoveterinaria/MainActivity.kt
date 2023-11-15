@@ -44,6 +44,11 @@ class MainActivity : AppCompatActivity() {
         }else if(medicoDAO.login(u,p)==1){
             Toast.makeText(this, "Bienvenido", Toast.LENGTH_SHORT).show()
             val intento2 = Intent(this, ContenedorActivity::class.java)
+
+            var bundle:Bundle = Bundle()
+            var nombre:String? = MedicoDAO(this).getNombreMedico(u)
+            bundle.putString("medicName", nombre)
+            intento2.putExtras(bundle)
             startActivity(intento2)
         }else{
             Toast.makeText(this, "Usuario y/o contraseña inválidos", Toast.LENGTH_SHORT).show()

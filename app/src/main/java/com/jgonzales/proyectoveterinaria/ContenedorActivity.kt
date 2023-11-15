@@ -10,24 +10,28 @@ class ContenedorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contenedor)
-        reemplazarFragmento(FragmentInicio())
+        val bundle = intent.extras
+        val medicName = bundle?.getString("medicName")
+        val args:Bundle = Bundle()
+        args.putString("medicName", medicName)
+        reemplazarFragmento(FragmentInicio(), args)
         var navigationView:BottomNavigationView = findViewById(R.id.bottomNavigationView)
         navigationView.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.navInicio -> reemplazarFragmento(FragmentInicio())
-                R.id.navCliente -> reemplazarFragmento(FragmentCliente())
-                R.id.navMascota -> reemplazarFragmento(FragmentMascota())
-                R.id.navMedicina -> reemplazarFragmento(FragmentMedicina())
-                R.id.navMedico -> reemplazarFragmento(FragmentMedico())
+                R.id.navInicio -> reemplazarFragmento(FragmentInicio(), args)
+                R.id.navCliente -> reemplazarFragmento(FragmentCliente(), args)
+                R.id.navMascota -> reemplazarFragmento(FragmentMascota(), args)
+                R.id.navMedicina -> reemplazarFragmento(FragmentMedicina(), args)
+                R.id.navMedico -> reemplazarFragmento(FragmentMedico(), args)
             }
             true
         }
-
     }
-    private fun reemplazarFragmento(fragment:Fragment){
+    private fun reemplazarFragmento(fragment:Fragment, args:Bundle){
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frLayout, fragment)
+        fragment.arguments=args
         fragmentTransaction.commit()
     }
 }

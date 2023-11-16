@@ -27,6 +27,7 @@ class FragmentMedico : Fragment() {
     lateinit var txtApeMedic:TextView
     lateinit var txtMailMedic:TextView
     lateinit var txtCelMedic:TextView
+    var medicName:String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +44,10 @@ class FragmentMedico : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_medico, container, false)
         asignarReferencias(view)
-        eventoOnClick()
         seccionMedico()
+        eventoOnClick()
         val databundle = arguments
-        val medicName=databundle!!.getString("medicName")
+        medicName=databundle!!.getString("medicName").toString()
         txtMensaje.setText("Hola "+medicName.toString())
         return view
     }
@@ -72,6 +73,9 @@ class FragmentMedico : Fragment() {
     fun eventoOnClick(){
         btnNuevoMedico.setOnClickListener{
             val intent = Intent(requireActivity(), NuevoMedico::class.java)
+            var bundle:Bundle = Bundle()
+            bundle.putString("medicName", medicName)
+            intent.putExtras(bundle)
             startActivity(intent)
         }
         btnEditarMedico.setOnClickListener {

@@ -23,14 +23,16 @@ class activity_nuevo_cliente : AppCompatActivity() {
     lateinit var txtCelularCliente:EditText
     lateinit var btnRegistrarCliente:Button
 
+    lateinit var medicName:String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nuevo_cliente)
-
         inicializar()
-
         asignarReferencias()
+        val bundle = intent.extras
+        medicName = bundle?.getString("medicName").toString()
     }
     fun inicializar(){
         imgRetrocederCliente = findViewById(R.id.imgRetrocedeCliente)
@@ -48,6 +50,11 @@ class activity_nuevo_cliente : AppCompatActivity() {
         btnRegistrarCliente = findViewById(R.id.btnRegistrarCliente)
         btnRegistrarCliente.setOnClickListener{
             registrarLibro()
+            val intent = Intent(this, ContenedorActivity::class.java)
+            var bundle:Bundle = Bundle()
+            bundle.putString("medicName", medicName)
+            intent.putExtras(bundle)
+            startActivity(intent)
         }
     }
 
@@ -69,18 +76,9 @@ class activity_nuevo_cliente : AppCompatActivity() {
             objCliente.celularCliente=celularCliente.toInt()
             val clienteDAO = ClienteDAO(this)
             val mensaje = clienteDAO.registrarCliente(objCliente)
-            mostrarMensaje(mensaje)
+            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
             limpiar()
         }
-    }
-
-    private fun mostrarMensaje(mensaje:String){
-        val ventana = AlertDialog.Builder(this)
-        ventana.setTitle("NOTIFICACIÓN")
-        ventana.setMessage(mensaje)
-        ventana.setPositiveButton("Aceptar", null)
-        ventana.create()
-        ventana.show()
     }
     private fun limpiar(){
         txtDNICliente.setText("")

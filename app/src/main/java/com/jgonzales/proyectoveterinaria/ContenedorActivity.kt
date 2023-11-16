@@ -36,4 +36,10 @@ class ContenedorActivity : AppCompatActivity() {
         fragment.arguments=args
         fragmentTransaction.commit()
     }
+
+    override fun onBackPressed() {
+        val a:Boolean = true
+        if(a){}
+        else{ super.onBackPressed()}
+    }
 }

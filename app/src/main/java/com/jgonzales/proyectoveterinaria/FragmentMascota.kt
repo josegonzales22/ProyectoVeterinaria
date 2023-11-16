@@ -30,6 +30,8 @@ class FragmentMascota : Fragment() {
     lateinit var btnEliminarMascota: Button
     lateinit var btnGenerarTicketMascota: Button
 
+    lateinit var medicName:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -47,7 +49,7 @@ class FragmentMascota : Fragment() {
         eventoOnClick()
         seccionMascota()
         val databundle = arguments
-        val medicName=databundle!!.getString("medicName")
+        medicName=databundle!!.getString("medicName").toString()
         txtMensaje.setText("Hola "+medicName.toString())
 
         return view
@@ -84,6 +86,9 @@ class FragmentMascota : Fragment() {
     fun eventoOnClick(){
         btnNuevaMascota.setOnClickListener{
             val intent = Intent(requireActivity(), NuevaMascota::class.java)
+            var bundle:Bundle = Bundle()
+            bundle.putString("medicName", medicName)
+            intent.putExtras(bundle)
             startActivity(intent)
         }
         btnEditarMascota.setOnClickListener {

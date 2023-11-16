@@ -2,13 +2,19 @@ package com.jgonzales.proyectoveterinaria
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.Spinner
+import android.widget.Toast
 
 class TicketMascota : AppCompatActivity() {
 
     lateinit var imgRetrocederMasTicket: ImageView
+    lateinit var btnGenerar:Button
+    var tipo:String = "Ejemplo de medicina 1"
 
     private val items = arrayOf("Ejemplo de medicina 1", "Ejemplo de medicina  2", "Ejemplo de medicina  3", "Ejemplo de medicina  4", "Ejemplo de medicina  5")
 
@@ -24,14 +30,37 @@ class TicketMascota : AppCompatActivity() {
         // Establecer la selección por defecto
         spinnerMascota.setSelection(0)
 
+        spinnerMascota.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                tipo = items[position]
+            }
+        }
+
         inicializar()
+        eventoOnClick()
+    }
+
+    private fun eventoOnClick() {
+        imgRetrocederMasTicket.setOnClickListener{
+            finish()
+        }
+        btnGenerar.setOnClickListener {
+            Toast.makeText(this, tipo, Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun inicializar(){
         imgRetrocederMasTicket = findViewById(R.id.imgRetrocederMasTicket)
-        imgRetrocederMasTicket.setOnClickListener{
-            finish()
-        }
+        btnGenerar = findViewById(R.id.btnGenerar)
     }
 
 }

@@ -61,6 +61,7 @@ class NuevoMedico : AppCompatActivity() {
         var contrasenia:String? = contrasenia2
         bundle.putString("medicDni", dni1)
         bundle.putString("medicContrasenia", contrasenia2)
+        bundle.putString("medicName", medicName)
         intento2.putExtras(bundle)
         startActivity(intento2)
     }

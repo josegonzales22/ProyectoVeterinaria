@@ -26,8 +26,8 @@
 
             <ImageView
                 android:id="@+id/imgRetrocederMediEditar"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="35dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="40dp"
                 android:src="@drawable/circlearrowleftsolid" />

@@ -10,11 +10,13 @@ class ContenedorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contenedor)
+
         val bundle = intent.extras
         val medicName = bundle?.getString("medicName")
         val args:Bundle = Bundle()
         args.putString("medicName", medicName)
         reemplazarFragmento(FragmentInicio(), args)
+
         var navigationView:BottomNavigationView = findViewById(R.id.bottomNavigationView)
         navigationView.setOnItemSelectedListener {
             when(it.itemId){

@@ -22,11 +22,14 @@ class NuevoMedico : AppCompatActivity() {
 
     lateinit var txtContraseniaMedico:EditText
     lateinit var btnRegistrarMedico: Button
+    lateinit var medicName:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nuevo_medico)
         inicializar()
         asignarReferencias()
+        val bundle = intent.extras
+        medicName = bundle?.getString("medicName").toString()
     }
 
     fun inicializar(){
@@ -34,6 +37,9 @@ class NuevoMedico : AppCompatActivity() {
         imgRetrocederMedNuevo.setOnClickListener{
             //finish()
             val intento3 = Intent(this, ContenedorActivity::class.java)
+            var bundle:Bundle = Bundle()
+            bundle.putString("medicName", medicName)
+            intento3.putExtras(bundle)
             startActivity(intento3)
         }
     }

@@ -1,5 +1,6 @@
 package com.jgonzales.proyectoveterinaria
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -18,80 +19,46 @@ class NuevoMedico : AppCompatActivity() {
     lateinit var imgRetrocederMedNuevo: ImageView
 
     lateinit var txtDNIMedico: EditText
-    lateinit var txtNombreMedico: EditText
-    lateinit var txtApellidoMedico: EditText
-    lateinit var txtCorreoMedico: EditText
-    lateinit var txtCelularMedico: EditText
+
     lateinit var txtContraseniaMedico:EditText
     lateinit var btnRegistrarMedico: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nuevo_medico)
-
         inicializar()
-
         asignarReferencias()
     }
 
     fun inicializar(){
         imgRetrocederMedNuevo = findViewById(R.id.imgRetrocederMedNuevo)
         imgRetrocederMedNuevo.setOnClickListener{
-            finish()
+            //finish()
+            val intento3 = Intent(this, ContenedorActivity::class.java)
+            startActivity(intento3)
         }
     }
     fun asignarReferencias(){
         txtDNIMedico = findViewById(R.id.txtDNIMedico)
-        txtNombreMedico = findViewById(R.id.txtNombreMedico)
-        txtApellidoMedico = findViewById(R.id.txtApellidoMedico)
-        txtCorreoMedico = findViewById(R.id.txtCorreoMedico)
-        txtCelularMedico = findViewById(R.id.txtCelularMedico)
         txtContraseniaMedico = findViewById(R.id.txtContrasenia)
-        btnRegistrarMedico = findViewById(R.id.btnRegistrarMedico)
+        btnRegistrarMedico = findViewById(R.id.btnCambiarMedico)
         btnRegistrarMedico.setOnClickListener{
-            registrarLibro()
+            mandarDatos()
+            //registrarLibro()
         }
     }
+    private fun mandarDatos(){
+        var dni1:String=txtDNIMedico.text.toString()
+        var contrasenia2:String=txtContraseniaMedico.text.toString()
+        val intento2 = Intent(this, NuevoMedico2::class.java)
+        var bundle:Bundle = Bundle()
+        var dni:String? = dni1
+        var contrasenia:String? = contrasenia2
+        bundle.putString("medicDni", dni1)
+        bundle.putString("medicContrasenia", contrasenia2)
+        intento2.putExtras(bundle)
+        startActivity(intento2)
+    }
 
-    private fun registrarLibro(){
-        val dniMedico=txtDNIMedico.text.toString()
-        val contraMedico=txtContraseniaMedico.text.toString()
-        val nombreMedico=txtNombreMedico.text.toString()
-        val apellidoMedico=txtApellidoMedico.text.toString()
-        val correoMedico=txtCorreoMedico.text.toString()
-        val celularMedico=txtCelularMedico.text.toString()
-
-        if(dniMedico.isEmpty() || nombreMedico.isEmpty() || apellidoMedico.isEmpty() || correoMedico.isEmpty() || celularMedico.isEmpty() || contraMedico.isEmpty()){
-            Toast.makeText(this, "Completar todos los campos", Toast.LENGTH_SHORT).show()
-        }else{
-            val objMedico = Medico()
-            objMedico.dniMedico=dniMedico
-            objMedico.contrasenia=contraMedico
-            objMedico.nombreMedico=nombreMedico
-            objMedico.apellidoMedico=apellidoMedico
-            objMedico.correoMedico=correoMedico
-            objMedico.celularMedico=celularMedico
-            val medicoDAO = MedicoDAO(this)
-            val mensaje = medicoDAO.registrarMedico(objMedico)
-            mostrarMensaje(mensaje)
-            limpiar()
-        }
-    }
-    private fun mostrarMensaje(mensaje:String){
-        val ventana = AlertDialog.Builder(this)
-        ventana.setTitle("NOTIFICACIÓN")
-        ventana.setMessage(mensaje)
-        ventana.setPositiveButton("Aceptar", null)
-        ventana.create()
-        ventana.show()
-    }
-    private fun limpiar(){
-        txtDNIMedico.setText("")
-        txtNombreMedico.setText("")
-        txtApellidoMedico.setText("")
-        txtCorreoMedico.setText("")
-        txtCelularMedico.setText("")
-        txtContraseniaMedico.setText("")
-    }
 
 
 }

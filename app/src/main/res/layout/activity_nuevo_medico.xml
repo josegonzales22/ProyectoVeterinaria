@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NuevoMedico"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:padding="10dp">
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -22,11 +22,10 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:gravity="center">
-
             <ImageView
                 android:id="@+id/imgRetrocederMedNuevo"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="35dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="40dp"
                 android:src="@drawable/circlearrowleftsolid" />
@@ -46,159 +45,95 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
-
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="650dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp">
-
-        <ScrollView
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="581dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nuevo Médico"
-                    android:textColor="#000000"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="Por favor, rellene todo el formulario"
-                    android:textColor="#99000000"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="DNI"
-                    android:textColor="#02020A"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/txtDNIMedico"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:hint="Ingrese su dni"
-                    android:inputType="number" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Contraseña"
-                    android:textColor="#02020A"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/txtContrasenia"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:hint="Ingrese su contraseña"
-                    android:inputType="textPassword" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Nombres"
-                    android:textColor="#02020A"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/txtNombreMedico"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:hint="Ingrese sus nombres"
-                    android:inputType="text" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Apellidos"
-                    android:textColor="#02020A"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/txtApellidoMedico"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:hint="Ingrese sus apellidos"
-                    android:inputType="text" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Correo"
-                    android:textColor="#02020A"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/txtCorreoMedico"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:hint="Ingrese su dirección de correo"
-                    android:inputType="text" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Celular"
-                    android:textColor="#02020A"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/txtCelularMedico"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:hint="Ingrese su celular"
-                    android:inputType="number" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center">
-
-                    <Button
-                        android:id="@+id/btnRegistrarMedico"
-                        android:layout_width="350dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/boton"
-                        android:text="Registrar"
-                        android:textColor="@color/white"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
-
-
-
+            android:layout_height="wrap_content"
+            android:text="Nuevo Médico"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Por favor, rellene todo el formulario"
+            android:textColor="#99000000"
+            android:textSize="14sp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayout11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="DNI"
+            android:textColor="#02020A"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/txtDNIMedico"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Ingrese su dni"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Contraseña"
+            android:textColor="#02020A"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/txtContrasenia"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Ingrese su contraseña"
+            android:inputType="textPassword" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="260dp"
+            android:src="@drawable/vet" />
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnCambiarMedico"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/contenedor_redon_cliente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout12"
+        android:text="Continuar"
+        android:textColor="@color/white"
+        android:textSize="20sp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

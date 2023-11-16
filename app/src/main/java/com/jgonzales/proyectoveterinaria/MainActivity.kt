@@ -53,5 +53,9 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Usuario y/o contraseña inválidos", Toast.LENGTH_SHORT).show()
         }
     }
-
+    override fun onBackPressed() {
+        val a:Boolean = true
+        if(a){}
+        else{ super.onBackPressed()}
+    }
 }

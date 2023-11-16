@@ -129,12 +129,12 @@
             android:textStyle="bold"
             android:textColor="#02020A"/>
 
-        <EditText
+        <Spinner
             android:id="@+id/txtGeneroMascota"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="Ingrese su genero"
-            android:inputType="text" />
+            android:background="@drawable/border_spinner"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"

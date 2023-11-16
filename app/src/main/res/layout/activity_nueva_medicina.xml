@@ -118,7 +118,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Ingrese su fecha de vencimiento"
-            android:inputType="date" />
+            android:inputType="text"
+            android:focusable="false"/>
 
         <TextView
             android:layout_width="match_parent"

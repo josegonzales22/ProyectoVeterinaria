@@ -2,11 +2,13 @@ package com.jgonzales.proyectoveterinaria
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import com.jgonzales.proyectoveterinaria.entidades.Cliente
 import com.jgonzales.proyectoveterinaria.entidades.Mascota
@@ -40,6 +42,7 @@ class FragmentInicio : Fragment() {
     lateinit var txtApeMedic:TextView
     lateinit var txtMailMedic:TextView
     lateinit var txtCelMedic:TextView
+    lateinit var btnCerrarSesion:Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,14 +62,22 @@ class FragmentInicio : Fragment() {
         seccionMascota()
         seccionMedico()
         seccionMedicamento()
+        eventoOnClick()
 
         val databundle = arguments
         val medicName=databundle!!.getString("medicName")
         txtMensaje.setText("Hola "+medicName.toString())
         return view
     }
+
+    private fun eventoOnClick() {
+        btnCerrarSesion.setOnClickListener {
+            val intent = Intent(requireActivity(), MainActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
     companion object {
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             FragmentInicio().apply {
@@ -90,6 +101,7 @@ class FragmentInicio : Fragment() {
         txtApeMedic = view.findViewById(R.id.infApeMed)
         txtMailMedic = view.findViewById(R.id.infMailMed)
         txtCelMedic = view.findViewById(R.id.infCelMed)
+        btnCerrarSesion = view.findViewById(R.id.btnLogOut)
     }
     fun seccionCliente(){
         var cli:ClienteDAO= ClienteDAO(requireActivity())
@@ -123,4 +135,5 @@ class FragmentInicio : Fragment() {
         txtMailMedic.setText("Correo: "+medic2.correoMedico)
         txtCelMedic.setText("Celular: "+medic2.celularMedico)
     }
+    
 }

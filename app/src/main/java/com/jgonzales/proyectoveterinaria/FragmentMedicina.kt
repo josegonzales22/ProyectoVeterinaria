@@ -30,6 +30,8 @@ class FragmentMedicina : Fragment() {
     lateinit var txtCantMed:TextView
     lateinit var txtDesMed:TextView
 
+    lateinit var medicName:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -47,7 +49,7 @@ class FragmentMedicina : Fragment() {
         eventoOnClick()
         seccionMedicamento()
         val databundle = arguments
-        val medicName=databundle!!.getString("medicName")
+        medicName=databundle!!.getString("medicName").toString()
         txtMensaje.setText("Hola "+medicName.toString())
         return view
     }
@@ -82,6 +84,9 @@ class FragmentMedicina : Fragment() {
     fun eventoOnClick(){
         btnNuevaMedicina.setOnClickListener{
             val intent = Intent(requireActivity(), NuevaMedicina::class.java)
+            var bundle:Bundle = Bundle()
+            bundle.putString("medicName", medicName)
+            intent.putExtras(bundle)
             startActivity(intent)
         }
         btnEditarMedicina.setOnClickListener {

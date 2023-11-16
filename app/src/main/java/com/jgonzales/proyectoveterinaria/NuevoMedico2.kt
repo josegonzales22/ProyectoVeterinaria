@@ -22,16 +22,18 @@ class NuevoMedico2 : AppCompatActivity() {
     lateinit var btnRegistrarMedico: Button
 
     lateinit var imgRetrocederMedNuevo: ImageView
+
+    lateinit var medicName:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nuevo_medico2)
         val bundle = intent.extras
         val dni2 = bundle?.getString("medicDni")
         val contrasenia2 = bundle?.getString("medicContrasenia")
+        medicName = bundle?.getString("medicName").toString()
         dni=dni2.toString()
         contrasenia=contrasenia2.toString()
-        //dni = intent.extras?.getString("medicDni").toString()
-        //contrasenia = intent.extras?.getString("medicContrasenia").toString()
         asignarReferencias()
         eventoOnClick()
     }
@@ -45,10 +47,18 @@ class NuevoMedico2 : AppCompatActivity() {
     fun eventoOnClick(){
         btnRegistrarMedico.setOnClickListener{
             registrarLibro()
+            val intent = Intent(this, ContenedorActivity::class.java)
+            var bundle:Bundle = Bundle()
+            bundle.putString("medicName", medicName)
+            intent.putExtras(bundle)
+            startActivity(intent)
         }
         imgRetrocederMedNuevo = findViewById(R.id.imgRetrocederMedNuevo)
         imgRetrocederMedNuevo.setOnClickListener{
             val intento2 = Intent(this, NuevoMedico::class.java)
+            var bundle:Bundle = Bundle()
+            bundle.putString("medicName", medicName)
+            intento2.putExtras(bundle)
             startActivity(intento2)
         }
     }
@@ -72,17 +82,9 @@ class NuevoMedico2 : AppCompatActivity() {
             objMedico.celularMedico=celularMedico
             val medicoDAO = MedicoDAO(this)
             val mensaje = medicoDAO.registrarMedico(objMedico)
-            mostrarMensaje(mensaje)
+            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
             limpiar()
         }
-    }
-    private fun mostrarMensaje(mensaje:String){
-        val ventana = AlertDialog.Builder(this)
-        ventana.setTitle("NOTIFICACIÓN")
-        ventana.setMessage(mensaje)
-        ventana.setPositiveButton("Aceptar", null)
-        ventana.create()
-        ventana.show()
     }
     private fun limpiar(){
         txtNombreMedico.setText("")

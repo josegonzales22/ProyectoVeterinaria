@@ -29,6 +29,7 @@ class FragmentCliente : Fragment() {
     lateinit var txtDniCli:TextView
     lateinit var txtNomCli:TextView
     lateinit var txtApeCli:TextView
+    lateinit var medicName:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -41,15 +42,13 @@ class FragmentCliente : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_cliente, container, false)
         asignarRerefencias(view)
         eventoOnClick()
-
         seccionCliente()
 
         val databundle = arguments
-        val medicName=databundle!!.getString("medicName")
+        medicName=databundle!!.getString("medicName").toString()
         txtMensaje.setText("Hola "+medicName.toString())
         return view
 
@@ -78,6 +77,9 @@ class FragmentCliente : Fragment() {
     fun eventoOnClick(){
         btnNuevoCliente.setOnClickListener{
             val intent = Intent(requireActivity(), activity_nuevo_cliente::class.java)
+            var bundle:Bundle = Bundle()
+            bundle.putString("medicName", medicName)
+            intent.putExtras(bundle)
             startActivity(intent)
         }
         btnEditarCliente.setOnClickListener {

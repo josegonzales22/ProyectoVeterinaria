@@ -118,7 +118,6 @@ class FragmentCliente : Fragment() {
                     *   la operación
                     * Caso no:
                     *   Mostrar un toast indicando que el cliente no existe
-                    *
                     * */
                     Toast.makeText(requireContext(), "Cliente $it encontrado", Toast.LENGTH_SHORT).show()
                 }

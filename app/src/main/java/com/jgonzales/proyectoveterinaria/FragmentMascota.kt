@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import com.jgonzales.proyectoveterinaria.dialog.DialogCliente
+import com.jgonzales.proyectoveterinaria.dialog.DialogMascota
 import com.jgonzales.proyectoveterinaria.entidades.Mascota
 import com.jgonzales.proyectoveterinaria.modelo.MascotaDAO
 
@@ -92,12 +95,41 @@ class FragmentMascota : Fragment() {
             startActivity(intent)
         }
         btnEditarMascota.setOnClickListener {
-            val intent = Intent(requireActivity(), EditarMascota::class.java)
-            startActivity(intent)
+            DialogMascota(
+                onSubmitClickListener = {
+                    /*
+                    * it = id de mascota
+                    * validar si el $it existe en la tabla mascotas
+                    *
+                    * Caso si:
+                    *   Redirigir al activity editar mascota y llenar el formululario por defecto
+                    *   con los datos de la mascota encontrada
+                    * Caso no:
+                    *   Mostrar un toast indicando que la mascota no existe
+                    *
+                    * */
+                    Toast.makeText(requireContext(), "Mascota $it encontrada", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(requireActivity(), EditarMascota::class.java)
+                    startActivity(intent)
+                }
+            ).show(parentFragmentManager, "dialogMascota")
         }
         btnEliminarMascota.setOnClickListener {
-            val intent = Intent(requireActivity(), EliminarMascota::class.java)
-            startActivity(intent)
+            DialogMascota(
+                onSubmitClickListener = {
+                    /*
+                    * it = dni de la mascota
+                    * validar si el $it existe en la tabla mascotas
+                    *
+                    * Caso si:
+                    *   Eliminar la mascota de la base de datos y mostrar un toast indicando
+                    *   la operación
+                    * Caso no:
+                    *   Mostrar un toast indicando que la mascota no existe
+                    * */
+                    Toast.makeText(requireContext(), "Mascota $it encontrada", Toast.LENGTH_SHORT).show()
+                }
+            ).show(parentFragmentManager, "dialogMascota")
         }
         btnGenerarTicketMascota.setOnClickListener {
             val intent = Intent(requireActivity(), TicketMascota::class.java)

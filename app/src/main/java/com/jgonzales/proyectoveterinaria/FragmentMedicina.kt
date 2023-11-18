@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import com.jgonzales.proyectoveterinaria.dialog.DialogMascota
+import com.jgonzales.proyectoveterinaria.dialog.DialogMedicina
 import com.jgonzales.proyectoveterinaria.entidades.Medicina
 import com.jgonzales.proyectoveterinaria.modelo.MedicinaDAO
 
@@ -90,12 +93,40 @@ class FragmentMedicina : Fragment() {
             startActivity(intent)
         }
         btnEditarMedicina.setOnClickListener {
-            val intent = Intent(requireActivity(), EditarMedicina::class.java)
-            startActivity(intent)
+            DialogMedicina(
+                onSubmitClickListener = {
+                    /*
+                    * it = id de medicina
+                    * validar si el $it existe en la tabla medicinas
+                    *
+                    * Caso si:
+                    *   Redirigir al activity editar medicina y llenar el formululario por defecto
+                    *   con los datos de la medicina encontrada
+                    * Caso no:
+                    *   Mostrar un toast indicando que la medicina no existe
+                    * */
+                    Toast.makeText(requireContext(), "Medicina $it encontrada", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(requireActivity(), EditarMedicina::class.java)
+                    startActivity(intent)
+                }
+            ).show(parentFragmentManager, "dialogMedicina")
         }
         btnEliminarMedicina.setOnClickListener {
-            val intent = Intent(requireActivity(), EliminarMedicina::class.java)
-            startActivity(intent)
+            DialogMedicina(
+                onSubmitClickListener = {
+                    /*
+                    * it = id de la medicina
+                    * validar si el $it existe en la tabla medicinas
+                    *
+                    * Caso si:
+                    *   Eliminar la medicina de la base de datos y mostrar un toast indicando
+                    *   la operación
+                    * Caso no:
+                    *   Mostrar un toast indicando que la medicina no existe
+                    * */
+                    Toast.makeText(requireContext(), "Medicina $it encontrada", Toast.LENGTH_SHORT).show()
+                }
+            ).show(parentFragmentManager, "dialogMedicina")
         }
     }
 }

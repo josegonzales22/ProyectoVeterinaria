@@ -2,4 +2,9 @@
     <string name="app_name">ProyectoVeterinaria</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="seleccionar">Seleccione una opción</string>
+    <string-array name="opciones">
+        <item>Macho</item>
+        <item>Hembra</item>
+    </string-array>
 </resources>

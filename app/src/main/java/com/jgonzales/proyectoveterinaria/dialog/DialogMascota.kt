@@ -1,9 +1,7 @@
 package com.jgonzales.proyectoveterinaria.dialog
 
 import android.app.AlertDialog
-import android.app.AlertDialog.Builder
 import android.app.Dialog
-import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -11,21 +9,22 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
 import com.jgonzales.proyectoveterinaria.databinding.DialogClienteBinding
+import com.jgonzales.proyectoveterinaria.databinding.DialogMascotaBinding
 
-class DialogCliente(
+class DialogMascota (
     private val onSubmitClickListener: (String) -> Unit
-) :DialogFragment(){
-    private lateinit var binding : DialogClienteBinding
+) : DialogFragment(){
+    private lateinit var binding : DialogMascotaBinding
     lateinit var dialog : AlertDialog
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        binding = DialogClienteBinding.inflate(LayoutInflater.from(context))
+        binding = DialogMascotaBinding.inflate(LayoutInflater.from(context))
         val builder = AlertDialog.Builder(requireActivity())
         builder.setView(binding.root)
         dialog = builder.create()
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window!!.setGravity(Gravity.CENTER_VERTICAL)
         binding.btnAceptar.setOnClickListener {
-            onSubmitClickListener.invoke(binding.txtDniCliente.text.toString())
+            onSubmitClickListener.invoke(binding.txtIdMascota.text.toString())
             dialog.dismiss()
         }
         binding.btnCancelar.setOnClickListener {

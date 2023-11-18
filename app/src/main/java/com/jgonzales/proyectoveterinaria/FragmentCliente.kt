@@ -1,22 +1,28 @@
 package com.jgonzales.proyectoveterinaria
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
+import com.jgonzales.proyectoveterinaria.databinding.FragmentClienteBinding
+import com.jgonzales.proyectoveterinaria.dialog.DialogCliente
 import com.jgonzales.proyectoveterinaria.entidades.Cliente
 import com.jgonzales.proyectoveterinaria.modelo.ClienteDAO
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 class FragmentCliente : Fragment() {
-    // TODO: Rename and change types of parameters
+    private lateinit var binding:FragmentClienteBinding
     private var param1: String? = null
     private var param2: String? = null
 
@@ -50,10 +56,9 @@ class FragmentCliente : Fragment() {
         val databundle = arguments
         medicName=databundle!!.getString("medicName").toString()
         txtMensaje.setText("Hola "+medicName.toString())
+
         return view
-
     }
-
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
@@ -69,7 +74,6 @@ class FragmentCliente : Fragment() {
         btnEditarCliente = view.findViewById(R.id.btnEditarMedico)
         btnEliminarCliente = view.findViewById(R.id.btnEliminarMedico)
         txtMensaje = view.findViewById(R.id.txtMensaje)
-
         txtDniCli = view.findViewById(R.id.infDniCli)
         txtNomCli = view.findViewById(R.id.infNomCli)
         txtApeCli = view.findViewById(R.id.infApeCli)
@@ -83,12 +87,42 @@ class FragmentCliente : Fragment() {
             startActivity(intent)
         }
         btnEditarCliente.setOnClickListener {
-            val intent = Intent(requireActivity(), EditarCliente::class.java)
-            startActivity(intent)
+            DialogCliente(
+                onSubmitClickListener = {
+                    /*
+                    * it = dni del cliente
+                    * validar si el $it existe en la tabla clientes
+                    *
+                    * Caso si:
+                    *   Redirigir al activity editar cliente y llenar el formululario por defecto
+                    *   con los datos del cliente encontrado
+                    * Caso no:
+                    *   Mostrar un toast indicando que el cliente no existe
+                    *
+                    * */
+                    Toast.makeText(requireContext(), "Cliente $it encontrado", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(requireActivity(), EditarCliente::class.java)
+                    startActivity(intent)
+                }
+            ).show(parentFragmentManager, "dialogCliente")
         }
         btnEliminarCliente.setOnClickListener {
-            val intent = Intent(requireActivity(), EliminarCliente::class.java)
-            startActivity(intent)
+            DialogCliente(
+                onSubmitClickListener = {
+                    /*
+                    * it = dni del cliente
+                    * validar si el $it existe en la tabla clientes
+                    *
+                    * Caso si:
+                    *   Eliminar el cliente de la base de datos y mostrar un toast indicando
+                    *   la operación
+                    * Caso no:
+                    *   Mostrar un toast indicando que el cliente no existe
+                    *
+                    * */
+                    Toast.makeText(requireContext(), "Cliente $it encontrado", Toast.LENGTH_SHORT).show()
+                }
+            ).show(parentFragmentManager, "dialogCliente")
         }
     }
     fun seccionCliente(){

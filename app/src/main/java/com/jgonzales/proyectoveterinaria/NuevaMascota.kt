@@ -27,7 +27,7 @@ class NuevaMascota : AppCompatActivity() {
 
     lateinit var medicName:String
     var tipo:String = "Macho"
-    private val items = arrayOf("Macho","Hembra")
+    var generoMascota:String = "Macho"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nueva_mascota)
@@ -37,25 +37,23 @@ class NuevaMascota : AppCompatActivity() {
         medicName = bundle?.getString("medicName").toString()
 
         val spinnerMascota: Spinner = findViewById(R.id.txtGeneroMascota)
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
+        val opciones = resources.getStringArray(R.array.opciones)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, opciones)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerMascota.adapter = adapter
         spinnerMascota.onItemSelectedListener=object : AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
-
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long
             ) {
-                tipo = items[position]
+                tipo = opciones[position]
             }
         }
-
-        // Establecer la selección por defecto
         spinnerMascota.setSelection(0)
     }
 
@@ -77,7 +75,6 @@ class NuevaMascota : AppCompatActivity() {
             bundle.putString("medicName", medicName)
             intent.putExtras(bundle)
             startActivity(intent)
-            //Toast.makeText(this, tipo, Toast.LENGTH_SHORT).show()
         }
     }
     private fun registrarLibro(){
@@ -105,5 +102,4 @@ class NuevaMascota : AppCompatActivity() {
         txtRazaMascota.setText("")
         txtGeneroMascota.setText("")
     }
-
 }

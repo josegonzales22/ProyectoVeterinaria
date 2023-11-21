@@ -12,7 +12,10 @@ import android.widget.Toast
 import com.jgonzales.proyectoveterinaria.dialog.DialogMascota
 import com.jgonzales.proyectoveterinaria.dialog.DialogMedicina
 import com.jgonzales.proyectoveterinaria.entidades.Medicina
+import com.jgonzales.proyectoveterinaria.modelo.ClienteDAO
 import com.jgonzales.proyectoveterinaria.modelo.MedicinaDAO
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -94,37 +97,50 @@ class FragmentMedicina : Fragment() {
         }
         btnEditarMedicina.setOnClickListener {
             DialogMedicina(
-                onSubmitClickListener = {
-                    /*
-                    * it = id de medicina
-                    * validar si el $it existe en la tabla medicinas
-                    *
-                    * Caso si:
-                    *   Redirigir al activity editar medicina y llenar el formululario por defecto
-                    *   con los datos de la medicina encontrada
-                    * Caso no:
-                    *   Mostrar un toast indicando que la medicina no existe
-                    * */
-                    Toast.makeText(requireContext(), "Medicina $it encontrada", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(requireActivity(), EditarMedicina::class.java)
-                    startActivity(intent)
+                onSubmitClickListener = {idMedicina ->
+                    val medicinaDAO = MedicinaDAO(requireActivity())
+
+                    try {
+                        // Validar si el cliente con el DNI proporcionado existe
+                        val medicinaExistente = medicinaDAO.obtenerClientePorId(idMedicina.toInt())
+
+                        if (medicinaExistente != null) {
+                            // El cliente existe, redirigir a la actividad EditarCliente
+                            val intent = Intent(requireActivity(), EditarMedicina::class.java)
+
+                            // Pasa los datos del cliente a la actividad de edición
+                            intent.putExtra("idMedicina", medicinaExistente.idMedicina)
+                            intent.putExtra("codigoMedicina", medicinaExistente.codigoMedicina?: "")
+                            intent.putExtra("descripcionMedicina", medicinaExistente.descripcionMedicina ?: "")
+
+                            // Suponiendo que medicinaExistente.fechaVencimientoMedicina es un objeto Date
+                            intent.putExtra("fechaVencimientoMedicina", SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(medicinaExistente.fechaVencimientoMedicina))
+
+
+                            intent.putExtra("cantidadMedicina", medicinaExistente.cantidadMedicina)
+
+                            startActivity(intent)
+                        } else {
+                            // El cliente no existe, mostrar Toast
+                            Toast.makeText(requireContext(), "Medicina con ID $idMedicina no encontrado", Toast.LENGTH_SHORT).show()
+                        }
+                    } catch (e: Exception) {
+                        // Manejar la excepción, por ejemplo, mostrar un mensaje de error
+                        Toast.makeText(requireContext(), "Medicina con I $idMedicina no encontrado", Toast.LENGTH_SHORT).show()
+                    }
                 }
             ).show(parentFragmentManager, "dialogMedicina")
         }
         btnEliminarMedicina.setOnClickListener {
             DialogMedicina(
-                onSubmitClickListener = {
-                    /*
-                    * it = id de la medicina
-                    * validar si el $it existe en la tabla medicinas
-                    *
-                    * Caso si:
-                    *   Eliminar la medicina de la base de datos y mostrar un toast indicando
-                    *   la operación
-                    * Caso no:
-                    *   Mostrar un toast indicando que la medicina no existe
-                    * */
-                    Toast.makeText(requireContext(), "Medicina $it encontrada", Toast.LENGTH_SHORT).show()
+                onSubmitClickListener = {idMedicina ->
+                    val medicinaDAO = MedicinaDAO(requireActivity())
+                    val resultado = medicinaDAO.eliminarMedicina(idMedicina.toInt())
+
+                    Toast.makeText(requireContext(), resultado, Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(requireContext(), ContenedorActivity::class.java)
+                    startActivity(intent)
                 }
             ).show(parentFragmentManager, "dialogMedicina")
         }

@@ -22,7 +22,9 @@ class NuevaMascota : AppCompatActivity() {
     lateinit var txtNombreMascota: EditText
     lateinit var txtEspecieMascota: EditText
     lateinit var txtRazaMascota: EditText
-    lateinit var txtGeneroMascota: EditText
+    //CAMBIE EL ODIGO DE JOSE
+    lateinit var txtGeneroMascota: View
+
     lateinit var btnRegistrarMascota: Button
 
     lateinit var medicName:String
@@ -68,6 +70,10 @@ class NuevaMascota : AppCompatActivity() {
         txtEspecieMascota = findViewById(R.id.txtEspecieMascota)
         txtRazaMascota = findViewById(R.id.txtRazaMascota)
         btnRegistrarMascota = findViewById(R.id.btnRegistrarMascota)
+
+        //CAMBIE EL ODIGO DE JOSE
+        txtGeneroMascota = findViewById(R.id.txtGeneroMascota) // Esto debería ser un Spinner en lugar de un EditText
+
         btnRegistrarMascota.setOnClickListener{
             registrarLibro()
             val intent = Intent(this, ContenedorActivity::class.java)
@@ -100,6 +106,11 @@ class NuevaMascota : AppCompatActivity() {
         txtNombreMascota.setText("")
         txtEspecieMascota.setText("")
         txtRazaMascota.setText("")
-        txtGeneroMascota.setText("")
+
+        //CAMBIE EL ODIGO DE JOSE
+        // Si txtGeneroMascota es un Spinner, selecciona el índice 0 como valor predeterminado
+        if (txtGeneroMascota is Spinner) {
+            (txtGeneroMascota as Spinner).setSelection(0)
+        }
     }
 }

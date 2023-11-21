@@ -3,6 +3,7 @@ package com.jgonzales.proyectoveterinaria
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.jgonzales.proyectoveterinaria.entidades.Cliente
 import com.jgonzales.proyectoveterinaria.modelo.ClienteDAO
+import com.jgonzales.proyectoveterinaria.util.BaseDatos
 
 class activity_nuevo_cliente : AppCompatActivity() {
 
@@ -80,6 +82,7 @@ class activity_nuevo_cliente : AppCompatActivity() {
             limpiar()
         }
     }
+
     private fun limpiar(){
         txtDNICliente.setText("")
         txtNombreCliente.setText("")
@@ -87,5 +90,7 @@ class activity_nuevo_cliente : AppCompatActivity() {
         txtCorreoCliente.setText("")
         txtCelularCliente.setText("")
     }
+
+
 
 }

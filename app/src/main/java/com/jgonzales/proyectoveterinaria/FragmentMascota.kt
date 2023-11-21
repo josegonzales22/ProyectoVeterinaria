@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.jgonzales.proyectoveterinaria.dialog.DialogCliente
 import com.jgonzales.proyectoveterinaria.dialog.DialogMascota
 import com.jgonzales.proyectoveterinaria.entidades.Mascota
+import com.jgonzales.proyectoveterinaria.modelo.ClienteDAO
 import com.jgonzales.proyectoveterinaria.modelo.MascotaDAO
 
 private const val ARG_PARAM1 = "param1"
@@ -96,38 +97,46 @@ class FragmentMascota : Fragment() {
         }
         btnEditarMascota.setOnClickListener {
             DialogMascota(
-                onSubmitClickListener = {
-                    /*
-                    * it = id de mascota
-                    * validar si el $it existe en la tabla mascotas
-                    *
-                    * Caso si:
-                    *   Redirigir al activity editar mascota y llenar el formululario por defecto
-                    *   con los datos de la mascota encontrada
-                    * Caso no:
-                    *   Mostrar un toast indicando que la mascota no existe
-                    *
-                    * */
-                    Toast.makeText(requireContext(), "Mascota $it encontrada", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(requireActivity(), EditarMascota::class.java)
-                    startActivity(intent)
+                onSubmitClickListener = {idMacota ->
+                    val mascotaDAO = MascotaDAO(requireActivity())
+
+                    try {
+                        // Validar si el cliente con el DNI proporcionado existe
+                        val mascotaExistente = mascotaDAO.obtenerMascotaPorId(idMacota.toInt())
+
+                        if (mascotaExistente != null) {
+                            // El cliente existe, redirigir a la actividad EditarCliente
+                            val intent = Intent(requireActivity(), EditarMascota::class.java)
+
+                            // Pasa los datos del cliente a la actividad de edición
+                            intent.putExtra("idMascota", mascotaExistente.idMascota)
+                            intent.putExtra("nombreMascota", mascotaExistente.nombreMascota?:"")
+                            intent.putExtra("especieMascota", mascotaExistente.especieMascota ?: "")
+                            intent.putExtra("razaMascota", mascotaExistente.razaMascota ?: "")
+                            intent.putExtra("generoMascota", mascotaExistente.generoMascota ?: "")
+
+                            startActivity(intent)
+                        } else {
+                            // El cliente no existe, mostrar Toast
+                            Toast.makeText(requireContext(), "Mascota con ID $idMacota no encontrado", Toast.LENGTH_SHORT).show()
+                        }
+                    } catch (e: Exception) {
+                        // Manejar la excepción, por ejemplo, mostrar un mensaje de error
+                        Toast.makeText(requireContext(), "Mascota con ID $idMacota no encontrado", Toast.LENGTH_SHORT).show()
+                    }
                 }
             ).show(parentFragmentManager, "dialogMascota")
         }
         btnEliminarMascota.setOnClickListener {
             DialogMascota(
-                onSubmitClickListener = {
-                    /*
-                    * it = dni de la mascota
-                    * validar si el $it existe en la tabla mascotas
-                    *
-                    * Caso si:
-                    *   Eliminar la mascota de la base de datos y mostrar un toast indicando
-                    *   la operación
-                    * Caso no:
-                    *   Mostrar un toast indicando que la mascota no existe
-                    * */
-                    Toast.makeText(requireContext(), "Mascota $it encontrada", Toast.LENGTH_SHORT).show()
+                onSubmitClickListener = {idMascota ->
+                    val mascotaDAO = MascotaDAO(requireActivity())
+                    val resultado = mascotaDAO.eliminarMascota(idMascota.toInt())
+
+                    Toast.makeText(requireContext(), resultado, Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(requireContext(), ContenedorActivity::class.java)
+                    startActivity(intent)
                 }
             ).show(parentFragmentManager, "dialogMascota")
         }

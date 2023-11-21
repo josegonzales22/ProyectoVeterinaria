@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.util.Log
+import com.jgonzales.proyectoveterinaria.entidades.Cliente
 import com.jgonzales.proyectoveterinaria.entidades.Mascota
 import com.jgonzales.proyectoveterinaria.entidades.Medicina
 import com.jgonzales.proyectoveterinaria.util.BaseDatos
@@ -78,5 +79,86 @@ class MedicinaDAO (context: Context){
         }
         db.close()
         return medicina
+    }
+
+    fun eliminarMedicina(idMedicina: Int): String {
+        var respuesta = ""
+        val db = baseDatos.writableDatabase
+        try {
+            val resultado = db.delete("medicinas", "idMedicina=?", arrayOf(idMedicina.toString()))
+            if (resultado == 0) {
+                respuesta = "Medicina no encontrada"
+            } else {
+                respuesta = "Medicina eliminada correctamente"
+            }
+        } catch (e: Exception) {
+            respuesta = e.message.toString()
+        } finally {
+            db.close()
+        }
+        return respuesta
+    }
+
+
+    fun obtenerClientePorId(idMedicina: Int): Medicina {
+        var medi: Medicina = Medicina()
+        val db = baseDatos.readableDatabase
+        val cr: Cursor = db.rawQuery("SELECT * FROM medicinas WHERE idMedicina = ?", arrayOf(idMedicina.toString()))
+        try {
+            if (cr != null && cr.moveToFirst()) {
+                do {
+                    medi.idMedicina = cr.getString(0).toInt()
+                    medi.codigoMedicina = cr.getString(1).toString()
+                    medi.descripcionMedicina = cr.getString(2).toString()
+
+                    // Convertir la cadena de fecha a Date
+                    val pattern = "dd-MM-yyyy"
+                    val dateFormat = SimpleDateFormat(pattern)
+                    val fecha = cr.getString(3).toString()
+                    val date = dateFormat.parse(fecha)
+                    medi.fechaVencimientoMedicina = date
+
+                    medi.cantidadMedicina = cr.getString(4).toInt()
+                } while (cr.moveToNext())
+            } else {
+                // Cliente no encontrado, puedes manejar esto de alguna manera
+            }
+        } catch (ex: Exception) {
+        }
+        db.close()
+        return medi
+    }
+
+    fun actualizarMedicina(medicina: Medicina): String {
+        var respuesta = ""
+        val db = baseDatos.writableDatabase
+
+        try {
+            val valores = ContentValues().apply {
+                put("codigoMedicina", medicina.codigoMedicina)
+                put("descripcionMedicina", medicina.descripcionMedicina)
+
+                // Formatear la fecha como cadena
+                val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+                val fechaVencimiento = dateFormat.format(medicina.fechaVencimientoMedicina)
+                put("fechaVencimientoMedicina", fechaVencimiento)
+
+                put("cantidadMedicina", medicina.cantidadMedicina)
+            }
+
+            val resultado = db.update("medicinas", valores, "idMedicina=?", arrayOf(medicina.idMedicina.toString()))
+
+            if (resultado > 0) {
+                respuesta = "Medicina actualizado correctamente"
+            } else {
+                respuesta = "Error al actualizar el medicamento"
+            }
+        } catch (e: Exception) {
+            respuesta = "Datos ingresados incorrectamente"
+        } finally {
+            db.close()
+        }
+
+        return respuesta
     }
 }

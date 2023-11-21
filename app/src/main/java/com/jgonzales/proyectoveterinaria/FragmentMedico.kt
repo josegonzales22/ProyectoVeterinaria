@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.jgonzales.proyectoveterinaria.dialog.DialogMedicina
 import com.jgonzales.proyectoveterinaria.dialog.DialogMedico
 import com.jgonzales.proyectoveterinaria.entidades.Medico
+import com.jgonzales.proyectoveterinaria.modelo.ClienteDAO
 import com.jgonzales.proyectoveterinaria.modelo.MedicoDAO
 
 private const val ARG_PARAM1 = "param1"
@@ -83,37 +84,46 @@ class FragmentMedico : Fragment() {
         }
         btnEditarMedico.setOnClickListener {
             DialogMedico(
-                onSubmitClickListener = {
-                    /*
-                    * it = dni de medico
-                    * validar si el $it existe en la tabla medicos
-                    *
-                    * Caso si:
-                    *   Redirigir al activity editar médico y llenar el formululario por defecto
-                    *   con los datos del médico encontrado
-                    * Caso no:
-                    *   Mostrar un toast indicando que el médico no existe
-                    * */
-                    Toast.makeText(requireContext(), "Médico $it encontrada", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(requireActivity(), EditarMedico::class.java)
-                    startActivity(intent)
+                onSubmitClickListener = {dniMedico ->
+                    val medicoDAO = MedicoDAO(requireActivity())
+
+                    try {
+                        // Validar si el cliente con el DNI proporcionado existe
+                        val medicoExistente = medicoDAO.obtenerMedicoPorDni(dniMedico.toInt())
+
+                        if (medicoExistente != null) {
+                            // El cliente existe, redirigir a la actividad EditarCliente
+                            val intent = Intent(requireActivity(), EditarMedico::class.java)
+
+                            // Pasa los datos del cliente a la actividad de edición
+                            intent.putExtra("dniMedico", medicoExistente.dniMedico)
+                            intent.putExtra("nombreMedico", medicoExistente.nombreMedico ?: "")
+                            intent.putExtra("apellidoMedico", medicoExistente.apellidoMedico ?: "")
+                            intent.putExtra("correoMedico", medicoExistente.correoMedico ?: "")
+                            intent.putExtra("celularMedico", medicoExistente.celularMedico)
+
+                            startActivity(intent)
+                        } else {
+                            // El cliente no existe, mostrar Toast
+                            Toast.makeText(requireContext(), "Medico con DNI $dniMedico no encontrado", Toast.LENGTH_SHORT).show()
+                        }
+                    } catch (e: Exception) {
+                        // Manejar la excepción, por ejemplo, mostrar un mensaje de error
+                        Toast.makeText(requireContext(), "Medico con DNI $dniMedico no encontrado", Toast.LENGTH_SHORT).show()
+                    }
                 }
             ).show(parentFragmentManager, "dialogMedico")
         }
         btnEliminarMedico.setOnClickListener {
             DialogMedico(
-                onSubmitClickListener = {
-                    /*
-                    * it = id del médico
-                    * validar si el $it existe en la tabla médicos
-                    *
-                    * Caso si:
-                    *   Eliminar el médico de la base de datos y mostrar un toast indicando
-                    *   la operación
-                    * Caso no:
-                    *   Mostrar un toast indicando que el médico no existe
-                    * */
-                    Toast.makeText(requireContext(), "Médico $it encontrada", Toast.LENGTH_SHORT).show()
+                onSubmitClickListener = {dniMedico ->
+                    val medicoDAO = MedicoDAO(requireActivity())
+                    val resultado = medicoDAO.eliminarMedico(dniMedico.toInt())
+
+                    Toast.makeText(requireContext(), resultado, Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(requireContext(), ContenedorActivity::class.java)
+                    startActivity(intent)
                 }
             ).show(parentFragmentManager, "dialogMedico")
         }

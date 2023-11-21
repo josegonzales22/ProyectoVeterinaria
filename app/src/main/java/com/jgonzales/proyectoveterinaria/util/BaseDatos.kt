@@ -4,6 +4,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.os.Build.VERSION
+import java.sql.SQLException
 
 class BaseDatos (context: Context) : SQLiteOpenHelper (context, DATABASE_NAME, null, VERSION) {
     companion object{
@@ -64,4 +65,6 @@ class BaseDatos (context: Context) : SQLiteOpenHelper (context, DATABASE_NAME, n
         db.execSQL("DROP TABLE IF EXISTS medicos")
         onCreate(db)
     }
+
+
 }

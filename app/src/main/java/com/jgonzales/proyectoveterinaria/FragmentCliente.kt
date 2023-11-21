@@ -36,12 +36,16 @@ class FragmentCliente : Fragment() {
     lateinit var txtNomCli:TextView
     lateinit var txtApeCli:TextView
     lateinit var medicName:String
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
 
     override fun onCreateView(
@@ -88,38 +92,48 @@ class FragmentCliente : Fragment() {
         }
         btnEditarCliente.setOnClickListener {
             DialogCliente(
-                onSubmitClickListener = {
-                    /*
-                    * it = dni del cliente
-                    * validar si el $it existe en la tabla clientes
-                    *
-                    * Caso si:
-                    *   Redirigir al activity editar cliente y llenar el formululario por defecto
-                    *   con los datos del cliente encontrado
-                    * Caso no:
-                    *   Mostrar un toast indicando que el cliente no existe
-                    *
-                    * */
-                    Toast.makeText(requireContext(), "Cliente $it encontrado", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(requireActivity(), EditarCliente::class.java)
-                    startActivity(intent)
+                onSubmitClickListener = {dniCliente ->
+                    val clienteDAO = ClienteDAO(requireActivity())
+
+                    try {
+                        // Validar si el cliente con el DNI proporcionado existe
+                        val clienteExistente = clienteDAO.obtenerClientePorDni(dniCliente.toInt())
+
+                        if (clienteExistente != null) {
+                            // El cliente existe, redirigir a la actividad EditarCliente
+                            val intent = Intent(requireActivity(), EditarCliente::class.java)
+
+                            // Pasa los datos del cliente a la actividad de edición
+                            intent.putExtra("dniCliente", clienteExistente.dniCliente)
+                            intent.putExtra("nombreCliente", clienteExistente.nombreCliente ?: "")
+                            intent.putExtra("apellidoCliente", clienteExistente.apellidoCliente ?: "")
+                            intent.putExtra("correoCliente", clienteExistente.correoCliente ?: "")
+                            intent.putExtra("celularCliente", clienteExistente.celularCliente)
+
+                            startActivity(intent)
+                        } else {
+                            // El cliente no existe, mostrar Toast
+                            Toast.makeText(requireContext(), "Cliente con DNI $dniCliente no encontrado", Toast.LENGTH_SHORT).show()
+                        }
+                    } catch (e: Exception) {
+                        // Manejar la excepción, por ejemplo, mostrar un mensaje de error
+                        Toast.makeText(requireContext(), "Cliente con DNI $dniCliente no encontrado", Toast.LENGTH_SHORT).show()
+                    }
                 }
             ).show(parentFragmentManager, "dialogCliente")
         }
         btnEliminarCliente.setOnClickListener {
             DialogCliente(
-                onSubmitClickListener = {
-                    /*
-                    * it = dni del cliente
-                    * validar si el $it existe en la tabla clientes
-                    *
-                    * Caso si:
-                    *   Eliminar el cliente de la base de datos y mostrar un toast indicando
-                    *   la operación
-                    * Caso no:
-                    *   Mostrar un toast indicando que el cliente no existe
-                    * */
-                    Toast.makeText(requireContext(), "Cliente $it encontrado", Toast.LENGTH_SHORT).show()
+                onSubmitClickListener = { dniCliente ->
+                    val clienteDAO = ClienteDAO(requireActivity())
+                    val resultado = clienteDAO.eliminarCliente(dniCliente.toInt())
+
+                    Toast.makeText(requireContext(), resultado, Toast.LENGTH_SHORT).show()
+
+                    // Después de mostrar el Toast, inicia la actividad
+                    val intent = Intent(requireContext(), ContenedorActivity::class.java)
+                    startActivity(intent)
+
                 }
             ).show(parentFragmentManager, "dialogCliente")
         }
@@ -132,4 +146,8 @@ class FragmentCliente : Fragment() {
         txtNomCli.setText("Nombre: "+cliente.nombreCliente)
         txtApeCli.setText("Apellido: "+cliente.apellidoCliente)
     }
+}
+
+private fun Intent.putExtra(s: String, cliente: Cliente) {
+
 }

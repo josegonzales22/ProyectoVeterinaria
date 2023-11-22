@@ -83,12 +83,12 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <Spinner
-            android:id="@+id/spinnerMascota"
+        <EditText
+            android:id="@+id/txtIdMedicina"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/border_spinner"
-            />
+            android:hint="Ingrese el ID de la medicina"
+            android:inputType="text" />
 
         <TextView
             android:layout_width="match_parent"
@@ -100,6 +100,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/txtCantMedicina"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="0"
@@ -115,10 +116,11 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/txtIdMascota"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Ingrese su ID de su mascota"
-            android:inputType="text"/>
+            android:inputType="text" />
 
         <TextView
             android:layout_width="match_parent"
@@ -130,6 +132,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/txtDniMedico"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Ingrese el DNI de su médico"
@@ -145,6 +148,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/txtDniCliente"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Ingrese el DNI del cliente"

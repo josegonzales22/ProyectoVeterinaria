@@ -167,14 +167,14 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
 
         <Button
+            android:id="@+id/btnListarClientes"
             android:layout_width="180dp"
             android:layout_height="match_parent"
             android:background="@drawable/boton_a"
             android:drawableTop="@drawable/wired_flat_268_avatar_man"
-            android:text="Lista de clientes"
             android:gravity="center_horizontal"
-            android:textColor="#F3F2F2"
-            />
+            android:text="Lista de clientes"
+            android:textColor="#F3F2F2" />
 
         <Button
             android:id="@+id/btnNuevoMedico"

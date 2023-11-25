@@ -3,6 +3,7 @@ package com.jgonzales.proyectoveterinaria.modelo
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
+import android.widget.Toast
 import com.jgonzales.proyectoveterinaria.entidades.Cliente
 import com.jgonzales.proyectoveterinaria.entidades.Mascota
 import com.jgonzales.proyectoveterinaria.util.BaseDatos
@@ -129,6 +130,39 @@ class ClienteDAO (context:Context) {
 
         return respuesta
     }
+    fun cargarClientes():ArrayList<Cliente>{
+        val listaClientes:ArrayList<Cliente> = ArrayList()
+        val query = "SELECT * FROM clientes"
+        val db = baseDatos.readableDatabase
+        val cursor:Cursor
+        try{
+            cursor = db.rawQuery(query, null)
+            if(cursor.count>0){
+                cursor.moveToFirst()
+                do{
+                    val id:Int = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
+                    val nombreCliente:String = cursor.getString(cursor.getColumnIndexOrThrow("nombreCliente"))
+                    val apellidoCliente:String = cursor.getString(cursor.getColumnIndexOrThrow("apellidoCliente"))
+                    val dni:Int = cursor.getInt(cursor.getColumnIndexOrThrow("dniCliente"))
+                    val correoCliente:String = cursor.getString(cursor.getColumnIndexOrThrow("correoCliente"))
+                    val celular:Int = cursor.getInt(cursor.getColumnIndexOrThrow("celularCliente"))
 
-
+                    val cliente = Cliente()
+                    cliente.id = id
+                    cliente.dniCliente = dni
+                    cliente.nombreCliente = nombreCliente
+                    cliente.apellidoCliente = apellidoCliente
+                    cliente.correoCliente = correoCliente
+                    cliente.celularCliente = celular
+                    listaClientes.add(cliente)
+                }while (cursor.moveToNext())
+            }
+        }catch (ex:Exception){
+            Toast.makeText(null, ex.message, Toast.LENGTH_SHORT).show()
+        }
+        finally {
+            db.close()
+        }
+        return listaClientes
+    }
 }

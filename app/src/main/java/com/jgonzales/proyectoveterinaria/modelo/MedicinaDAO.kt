@@ -181,15 +181,15 @@ class MedicinaDAO (context: Context){
                     val id:Int = cursor.getInt(cursor.getColumnIndexOrThrow("idMedicina"))
                     val codigoMedicina:String = cursor.getString(cursor.getColumnIndexOrThrow("codigoMedicina"))
                     val descripcionMedicina:String = cursor.getString(cursor.getColumnIndexOrThrow("descripcionMedicina"))
-                    val fechaVMedicina:Date = convertirStringADate(cursor.getString(cursor.getColumnIndexOrThrow("fechaVencimientoMedicina")))
+                    //val fechaVMedicina = convertirStringADate(cursor.getString(cursor.getColumnIndexOrThrow("fechaVencimientoMedicina")))
+                    val fechaVMedicina:String = cursor.getString(cursor.getColumnIndexOrThrow("fechaVencimientoMedicina"))
                     val cantidadMedicina:Int = cursor.getInt(cursor.getColumnIndexOrThrow("cantidadMedicina"))
 
                     val medicina = Medicina()
                     medicina.idMedicina = id
                     medicina.codigoMedicina = codigoMedicina
                     medicina.descripcionMedicina = descripcionMedicina
-
-                    medicina.fechaVencimientoMedicina = fechaVMedicina
+                    medicina.fechaVencimientoMedicina = convertirStringADate(fechaVMedicina)
                     medicina.cantidadMedicina = cantidadMedicina
                     listaMedicina.add(medicina)
                 }while (cursor.moveToNext())

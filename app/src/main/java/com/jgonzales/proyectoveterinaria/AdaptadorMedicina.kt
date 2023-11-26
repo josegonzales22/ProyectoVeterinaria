@@ -5,8 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.jgonzales.proyectoveterinaria.entidades.Medicina
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Date
 
 class AdaptadorMedicina:RecyclerView.Adapter<AdaptadorMedicina.MiViewHolder>() {
@@ -22,11 +26,19 @@ class AdaptadorMedicina:RecyclerView.Adapter<AdaptadorMedicina.MiViewHolder>() {
         private var fechaVencimientoMedicina = view.findViewById<TextView>(R.id.filaMedVenc)
         private var cantidadMedicina = view.findViewById<TextView>(R.id.filaMedCant)
         fun bindView(medicina: Medicina){
-            this.idMedicina.text = medicina.idMedicina.toString()
-            this.codigoMedicina.text = medicina.codigoMedicina
-            this.descripcionMedicina.text = medicina.descripcionMedicina
-            this.fechaVencimientoMedicina.text = medicina.fechaVencimientoMedicina.toString()
-            this.cantidadMedicina.text = medicina.cantidadMedicina.toString()
+            try{
+                val fecha: Date =medicina.fechaVencimientoMedicina
+                val formato = SimpleDateFormat("dd-MM-yyyy")
+                val fechaFormateada = formato.format(fecha)
+
+                this.idMedicina.text = medicina.idMedicina.toString()
+                this.codigoMedicina.text = medicina.codigoMedicina
+                this.descripcionMedicina.text = medicina.descripcionMedicina
+                this.fechaVencimientoMedicina.text = fechaFormateada.toString()
+                this.cantidadMedicina.text = medicina.cantidadMedicina.toString()
+            }catch (ex:Exception){
+                Toast.makeText(null, ex.message, Toast.LENGTH_LONG).show()
+            }
         }
     }
 

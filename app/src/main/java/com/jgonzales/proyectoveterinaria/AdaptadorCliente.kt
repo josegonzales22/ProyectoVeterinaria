@@ -15,10 +15,10 @@ class AdaptadorCliente : RecyclerView.Adapter<AdaptadorCliente.MiViewHolder>(){
     fun contexto(context: Context){ this.context = context }
     fun agregarItems(items:ArrayList<Cliente>){ this.listaClientes = items }
     class MiViewHolder(var view: View):RecyclerView.ViewHolder(view){
-        private var nombres = view.findViewById<TextView>(R.id.filaCliNom)
-        private var dni = view.findViewById<TextView>(R.id.filaCliDni)
-        private var correo = view.findViewById<TextView>(R.id.filaCliCorreo)
-        private var celular = view.findViewById<TextView>(R.id.filaCliCel)
+        private var nombres = view.findViewById<TextView>(R.id.filaMedDes)
+        private var dni = view.findViewById<TextView>(R.id.filaMedCod)
+        private var correo = view.findViewById<TextView>(R.id.filaMedVenc)
+        private var celular = view.findViewById<TextView>(R.id.filaMedCant)
 
         fun bindView (cliente: Cliente){
             this.nombres.text = cliente.nombreCliente + " " + cliente.apellidoCliente

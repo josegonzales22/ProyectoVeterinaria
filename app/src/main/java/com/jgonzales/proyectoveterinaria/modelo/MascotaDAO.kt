@@ -4,10 +4,11 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.util.Log
+import android.widget.Toast
 import com.jgonzales.proyectoveterinaria.entidades.Cliente
 import com.jgonzales.proyectoveterinaria.entidades.Mascota
 import com.jgonzales.proyectoveterinaria.util.BaseDatos
-import java.lang.Exception
+import kotlin.Exception
 
 class MascotaDAO (context: Context) {
     private var baseDatos:BaseDatos = BaseDatos(context)
@@ -126,5 +127,38 @@ class MascotaDAO (context: Context) {
         }
 
         return respuesta
+    }
+    fun cargarMascotas():ArrayList<Mascota>{
+        val listaMascota:ArrayList<Mascota> = ArrayList()
+        val query = "SELECT * FROM mascotas"
+        val db = baseDatos.readableDatabase
+        val cursor:Cursor
+
+        try{
+            cursor = db.rawQuery(query, null)
+            if(cursor.count>0){
+                cursor.moveToFirst()
+                do{
+                    val id:Int = cursor.getInt(cursor.getColumnIndexOrThrow("idMascota"))
+                    val nombreMascota:String = cursor.getString(cursor.getColumnIndexOrThrow("nombreMascota"))
+                    val especieMascota:String = cursor.getString(cursor.getColumnIndexOrThrow("especieMascota"))
+                    val razaMascota:String = cursor.getString(cursor.getColumnIndexOrThrow("razaMascota"))
+                    val generoMascota:String = cursor.getString(cursor.getColumnIndexOrThrow("generoMascota"))
+
+                    val mascota = Mascota()
+                    mascota.idMascota = id
+                    mascota.nombreMascota = nombreMascota
+                    mascota.especieMascota = especieMascota
+                    mascota.razaMascota = razaMascota
+                    mascota.generoMascota = generoMascota
+                    listaMascota.add(mascota)
+                }while (cursor.moveToNext())
+            }
+        }catch (ex:Exception){
+            Toast.makeText(null, ex.message, Toast.LENGTH_SHORT).show()
+        }finally {
+            db.close()
+        }
+        return listaMascota
     }
 }

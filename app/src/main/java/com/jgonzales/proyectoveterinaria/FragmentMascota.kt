@@ -30,6 +30,7 @@ class FragmentMascota : Fragment() {
     lateinit var txtGenMas:TextView
 
     lateinit var btnNuevaMascota: Button
+    lateinit var btnListarMascota : Button
     lateinit var btnEditarMascota: Button
     lateinit var btnEliminarMascota: Button
     lateinit var btnGenerarTicketMascota: Button
@@ -79,6 +80,7 @@ class FragmentMascota : Fragment() {
     }
     fun asignarReferencias(view : View){
         btnNuevaMascota = view.findViewById(R.id.btnNuevoMedico)
+        btnListarMascota = view.findViewById(R.id.btnListarMascotas)
         btnEditarMascota = view.findViewById(R.id.btnEditarMedico)
         btnEliminarMascota = view.findViewById(R.id.btnEliminarMedico)
         btnGenerarTicketMascota = view.findViewById(R.id.btnGenerarTicketMascota)
@@ -93,6 +95,10 @@ class FragmentMascota : Fragment() {
             var bundle:Bundle = Bundle()
             bundle.putString("medicName", medicName)
             intent.putExtras(bundle)
+            startActivity(intent)
+        }
+        btnListarMascota.setOnClickListener {
+            val intent = Intent(requireActivity(), ListaMascotaActivity::class.java)
             startActivity(intent)
         }
         btnEditarMascota.setOnClickListener {

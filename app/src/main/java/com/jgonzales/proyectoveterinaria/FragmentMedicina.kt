@@ -29,6 +29,7 @@ class FragmentMedicina : Fragment() {
     lateinit var txtMensaje:TextView
 
     lateinit var btnNuevaMedicina: Button
+    lateinit var btnListarMedicinas:Button
     lateinit var btnEditarMedicina: Button
     lateinit var btnEliminarMedicina: Button
 
@@ -80,6 +81,7 @@ class FragmentMedicina : Fragment() {
     }
     fun asignarReferencias(view : View){
         btnNuevaMedicina = view.findViewById(R.id.btnNuevoMedicamento)
+        btnListarMedicinas = view.findViewById(R.id.btnListarMedicamento)
         btnEditarMedicina = view.findViewById(R.id.btnEditarMedicamento)
         btnEliminarMedicina = view.findViewById(R.id.btnEliminarMedicamento)
         txtMensaje = view.findViewById(R.id.txtMensaje)
@@ -94,6 +96,14 @@ class FragmentMedicina : Fragment() {
             bundle.putString("medicName", medicName)
             intent.putExtras(bundle)
             startActivity(intent)
+        }
+        btnListarMedicinas.setOnClickListener {
+            try{
+                val intent2 = Intent(requireActivity(), ListaMedicinaActivity::class.java)
+                startActivity(intent2)
+            }catch (ex:Exception){
+                Toast.makeText(requireActivity(), ex.message, Toast.LENGTH_SHORT).show()
+            }
         }
         btnEditarMedicina.setOnClickListener {
             DialogMedicina(

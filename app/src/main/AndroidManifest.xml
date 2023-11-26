@@ -16,6 +16,12 @@
         android:theme="@style/Theme.ProyectoVeterinaria"
         tools:targetApi="31">
         <activity
+            android:name=".ListaMedicinaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ListaMascotaActivity"
+            android:exported="false" />
+        <activity
             android:name=".ListaClientesActivity"
             android:exported="false" />
         <activity

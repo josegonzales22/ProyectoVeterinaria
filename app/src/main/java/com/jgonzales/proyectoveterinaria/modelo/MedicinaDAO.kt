@@ -4,16 +4,22 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.util.Log
+import android.widget.TextView
+import android.widget.Toast
+import com.jgonzales.proyectoveterinaria.R
 import com.jgonzales.proyectoveterinaria.entidades.Cliente
 import com.jgonzales.proyectoveterinaria.entidades.Mascota
 import com.jgonzales.proyectoveterinaria.entidades.Medicina
 import com.jgonzales.proyectoveterinaria.util.BaseDatos
-import java.lang.Exception
+import java.text.DateFormat
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Date
+import java.util.Locale
+import kotlin.Exception
 
 class MedicinaDAO (context: Context){
     private var baseDatos: BaseDatos = BaseDatos(context)
@@ -160,5 +166,48 @@ class MedicinaDAO (context: Context){
         }
 
         return respuesta
+    }
+    fun cargarMedicinas():ArrayList<Medicina>{
+        val listaMedicina:ArrayList<Medicina> = ArrayList()
+        val query = "SELECT * FROM medicinas"
+        val db = baseDatos.readableDatabase
+        val cursor:Cursor
+
+        try{
+            cursor = db.rawQuery(query, null)
+            if(cursor.count>0){
+                cursor.moveToFirst()
+                do{
+                    val id:Int = cursor.getInt(cursor.getColumnIndexOrThrow("idMedicina"))
+                    val codigoMedicina:String = cursor.getString(cursor.getColumnIndexOrThrow("codigoMedicina"))
+                    val descripcionMedicina:String = cursor.getString(cursor.getColumnIndexOrThrow("descripcionMedicina"))
+                    val fechaVMedicina:Date = convertirStringADate(cursor.getString(cursor.getColumnIndexOrThrow("fechaVencimientoMedicina")))
+                    val cantidadMedicina:Int = cursor.getInt(cursor.getColumnIndexOrThrow("cantidadMedicina"))
+
+                    val medicina = Medicina()
+                    medicina.idMedicina = id
+                    medicina.codigoMedicina = codigoMedicina
+                    medicina.descripcionMedicina = descripcionMedicina
+
+                    medicina.fechaVencimientoMedicina = fechaVMedicina
+                    medicina.cantidadMedicina = cantidadMedicina
+                    listaMedicina.add(medicina)
+                }while (cursor.moveToNext())
+            }
+        }catch (ex:Exception){
+            Toast.makeText(null, ex.message, Toast.LENGTH_SHORT).show()
+        }finally {
+            db.close()
+        }
+        return listaMedicina
+    }
+    fun convertirStringADate(fechaStr: String): Date {
+        try {
+            val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+            return sdf.parse(fechaStr) ?: Date()
+        } catch (e: ParseException) {
+            // Manejar la excepción, por ejemplo, devolver una fecha predeterminada
+            return Date()
+        }
     }
 }

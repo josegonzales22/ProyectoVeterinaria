@@ -25,7 +25,7 @@
                 app:srcCompat="@drawable/icon_cliente" />
 
             <TextView
-                android:id="@+id/filaCliNom"
+                android:id="@+id/filaMedDes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -47,10 +47,10 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/filaCliNom" />
+                app:layout_constraintTop_toBottomOf="@+id/filaMedDes" />
 
             <TextView
-                android:id="@+id/filaCliDni"
+                android:id="@+id/filaMedCod"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -59,7 +59,7 @@
                 android:textAlignment="viewStart"
                 android:typeface="normal"
                 app:layout_constraintStart_toEndOf="@+id/textView4"
-                app:layout_constraintTop_toBottomOf="@+id/filaCliNom" />
+                app:layout_constraintTop_toBottomOf="@+id/filaMedDes" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -73,7 +73,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
             <TextView
-                android:id="@+id/filaCliCorreo"
+                android:id="@+id/filaMedVenc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -81,7 +81,7 @@
                 android:text="ejemplo@example.com"
                 android:textAlignment="viewStart"
                 app:layout_constraintStart_toEndOf="@+id/textView6"
-                app:layout_constraintTop_toBottomOf="@+id/filaCliDni" />
+                app:layout_constraintTop_toBottomOf="@+id/filaMedCod" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -95,7 +95,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
             <TextView
-                android:id="@+id/filaCliCel"
+                android:id="@+id/filaMedCant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -103,7 +103,7 @@
                 android:text="+51 123456789"
                 android:textAlignment="viewStart"
                 app:layout_constraintStart_toEndOf="@+id/textView8"
-                app:layout_constraintTop_toBottomOf="@+id/filaCliCorreo" />
+                app:layout_constraintTop_toBottomOf="@+id/filaMedVenc" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

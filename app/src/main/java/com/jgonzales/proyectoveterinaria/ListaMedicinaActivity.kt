@@ -34,10 +34,10 @@ class ListaMedicinaActivity : AppCompatActivity() {
     }
 
     private fun asignarReferencias() {
-        btnBackMedicinas = findViewById(R.id.btnBackMedicina)
+        btnBackMedicinas = findViewById(R.id.btnBackMedicos)
         btnBackMedicinas.setOnClickListener { finish() }
         dao = MedicinaDAO(this)
-        rvMedicinas = findViewById(R.id.rvListarMedicinas)
+        rvMedicinas = findViewById(R.id.rvListarMedicos)
         rvMedicinas.layoutManager = LinearLayoutManager(this)
         adaptador = AdaptadorMedicina()
         rvMedicinas.adapter = adaptador

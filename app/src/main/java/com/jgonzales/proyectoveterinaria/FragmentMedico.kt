@@ -25,6 +25,7 @@ class FragmentMedico : Fragment() {
     lateinit var txtMensaje:TextView
 
     lateinit var btnNuevoMedico: Button
+    lateinit var btnListarMedico : Button
     lateinit var btnEditarMedico: Button
     lateinit var btnEliminarMedico: Button
 
@@ -67,6 +68,7 @@ class FragmentMedico : Fragment() {
     }
     fun asignarReferencias(view : View){
         btnNuevoMedico = view.findViewById(R.id.btnNuevoMedico)
+        btnListarMedico = view.findViewById(R.id.btnListarMedico)
         btnEditarMedico = view.findViewById(R.id.btnEditarMedico)
         btnEliminarMedico = view.findViewById(R.id.btnEliminarMedico)
         txtMensaje = view.findViewById(R.id.txtMensaje)
@@ -80,6 +82,10 @@ class FragmentMedico : Fragment() {
             var bundle:Bundle = Bundle()
             bundle.putString("medicName", medicName)
             intent.putExtras(bundle)
+            startActivity(intent)
+        }
+        btnListarMedico.setOnClickListener {
+            val intent = Intent(requireActivity(), ListaMedicoActivity::class.java)
             startActivity(intent)
         }
         btnEditarMedico.setOnClickListener {

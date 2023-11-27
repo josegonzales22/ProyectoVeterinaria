@@ -15,10 +15,10 @@ class AdaptadorMascota:RecyclerView.Adapter<AdaptadorMascota.MiViewHolder>() {
     fun agregarItems(items:ArrayList<Mascota>){ this.listaMascotas = items }
     class  MiViewHolder(var view:View):RecyclerView.ViewHolder(view){
         private var id = view.findViewById<TextView>(R.id.filaMasId)
-        private var nombres = view.findViewById<TextView>(R.id.filaMedDes)
-        private var especie = view.findViewById<TextView>(R.id.filaMedCod)
-        private var raza = view.findViewById<TextView>(R.id.filaMedVenc)
-        private var genero = view.findViewById<TextView>(R.id.filaMedCant)
+        private var nombres = view.findViewById<TextView>(R.id.filaMedNom)
+        private var especie = view.findViewById<TextView>(R.id.filaMedDni)
+        private var raza = view.findViewById<TextView>(R.id.filaMedCorreo)
+        private var genero = view.findViewById<TextView>(R.id.filaMedCel)
 
         fun bindView(mascota: Mascota){
             this.id.text = mascota.idMascota.toString()

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListaMedicinaActivity">
+    tools:context=".ListaMedicoActivity">
     <ImageButton
         android:id="@+id/btnBackMedicos"
         android:layout_width="50dp"
@@ -16,21 +16,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/back_icon"
         android:contentDescription="TODO" />
-
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="sans-serif"
-        android:text="Lista de medicinas"
+        android:text="Lista de médicos"
         android:textColor="@color/colorPrincipal"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnBackMedicos"
         app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvListarMedicos"
         android:layout_width="409dp"
@@ -39,5 +37,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
-        tools:listitem="@layout/fila_medicina" />
+        tools:listitem="@layout/fila_medicos" />
 </androidx.constraintlayout.widget.ConstraintLayout>

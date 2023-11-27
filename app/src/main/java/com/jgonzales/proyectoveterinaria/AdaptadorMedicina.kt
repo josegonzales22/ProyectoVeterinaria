@@ -9,8 +9,6 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.jgonzales.proyectoveterinaria.entidades.Medicina
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.Date
 
 class AdaptadorMedicina:RecyclerView.Adapter<AdaptadorMedicina.MiViewHolder>() {
@@ -21,10 +19,10 @@ class AdaptadorMedicina:RecyclerView.Adapter<AdaptadorMedicina.MiViewHolder>() {
 
     class MiViewHolder(var view : View):RecyclerView.ViewHolder(view) {
         private var idMedicina = view.findViewById<TextView>(R.id.filaMedId)
-        private var codigoMedicina = view.findViewById<TextView>(R.id.filaMedCod)
-        private var descripcionMedicina = view.findViewById<TextView>(R.id.filaMedDes)
-        private var fechaVencimientoMedicina = view.findViewById<TextView>(R.id.filaMedVenc)
-        private var cantidadMedicina = view.findViewById<TextView>(R.id.filaMedCant)
+        private var codigoMedicina = view.findViewById<TextView>(R.id.filaMedDni)
+        private var descripcionMedicina = view.findViewById<TextView>(R.id.filaMedNom)
+        private var fechaVencimientoMedicina = view.findViewById<TextView>(R.id.filaMedCorreo)
+        private var cantidadMedicina = view.findViewById<TextView>(R.id.filaMedCel)
         fun bindView(medicina: Medicina){
             try{
                 val fecha: Date =medicina.fechaVencimientoMedicina

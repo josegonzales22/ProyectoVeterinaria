@@ -156,4 +156,40 @@ class MedicoDAO (context: Context) {
 
         return respuesta
     }
+    fun cargarMedicos():ArrayList<Medico>{
+        val listaMedicos:ArrayList<Medico> = ArrayList()
+        val query = "SELECT * FROM medicos"
+        val db = baseDatos.readableDatabase
+        val cursor:Cursor
+        try{
+            cursor = db.rawQuery(query,null)
+            if(cursor.count > 0){
+                cursor.moveToFirst()
+                do{
+                    val id:Int = cursor.getInt(cursor.getColumnIndexOrThrow("idMedico"))
+                    val dni:String = cursor.getString(cursor.getColumnIndexOrThrow("dniMedico"))
+                    val nombre:String = cursor.getString(cursor.getColumnIndexOrThrow("nombreMedico"))
+                    val apellido:String = cursor.getString(cursor.getColumnIndexOrThrow("apellidoMedico"))
+                    val correo:String = cursor.getString(cursor.getColumnIndexOrThrow("correoMedico"))
+                    val celular:String = cursor.getString(cursor.getColumnIndexOrThrow("celularMedico"))
+
+                    val medico = Medico()
+                    medico.idMedico = id
+                    medico.dniMedico = dni
+                    medico.contrasenia = ""
+                    medico.nombreMedico = nombre
+                    medico.apellidoMedico = apellido
+                    medico.correoMedico = correo
+                    medico.celularMedico = celular
+
+                    listaMedicos.add(medico)
+                }while (cursor.moveToNext())
+            }
+        }catch (e:Exception){
+
+        }finally {
+            db.close()
+        }
+        return listaMedicos
+    }
 }
